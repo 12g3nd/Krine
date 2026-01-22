@@ -1,0 +1,58 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container"
+    style="max-width: 800px; margin: 40px auto; background: white; padding: 40px; border: var(--border-width) solid var(--border-color); box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--border-color);">
+    <div class="static-content">
+        {% if page_name == 'about' %}
+        <h2>About Krine</h2>
+        <p>Krine is a safe space for anonymous reflections. We believe that honesty thrives when identity is removed
+            from the equation. Our platform is designed to let you express your true thoughts without the pressure of a
+            persona.</p>
+        <p>Built with privacy at its core, Krine uses advanced AI moderation to keep the community safe while
+            maintaining your anonymity.</p>
+
+        {% elif page_name == 'mission' %}
+        <h2>Our Mission</h2>
+        <p>To connect humanity through shared, unfiltered, and anonymous experiences.</p>
+        <p>We strive to build a corner of the internet where you can be yourself—completely unmasked. We value:</p>
+        <ul>
+            <li><strong>Anonymity:</strong> Your identity is your own.</li>
+            <li><strong>Safety:</strong> A toxic-free environment powered by smart moderation.</li>
+            <li><strong>Simplicity:</strong> No distractions, just thoughts.</li>
+        </ul>
+
+        {% elif page_name == 'faq' %}
+        <h2>Frequently Asked Questions</h2>
+        <h3>Is it really anonymous?</h3>
+        <p>Yes. We do not require account creation. We do not track your IP for marketing purposes. We use basic session
+            IDs only to prevent spam and handle likes, but these are transient.</p>
+        <h3>How do you moderate content?</h3>
+        <p>We use a locally running AI model (DistilBERT) to scan every post for toxicity, hate speech, and
+            inappropriate content before it goes live.</p>
+
+        {% elif page_name == 'legal' %}
+        <h2>Terms & Privacy</h2>
+        <p>By using Krine, you agree to treat others with respect. We reserve the right to remove any content that
+            violates common decency or legal statutes.</p>
+        <p><strong>Privacy:</strong> We don't want your data. We don't collect your email, phone number, or real name.
+        </p>
+
+        {% elif page_name == 'security' %}
+        <h2>Security</h2>
+        <p>We implement standard security practices to ensure the platform remains available and safe. However, as an
+            anonymous platform, the best security is the lack of personal data collection.</p>
+
+        {% elif page_name == 'safety' %}
+        <h2>Safety Center</h2>
+        <p>If you or someone you know is in immediate danger, please contact local emergency services. Krine is not a
+            replacement for professional help.</p>
+        <p>If you see content that slipped through our filters, please report it (feature coming soon).</p>
+
+        {% else %}
+        <h2>Page Not Found</h2>
+        <p>The page you are looking for does not exist.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="post-form-container">
+    <h2 style="margin-bottom: 20px; font-size: 2rem;">Write something</h2>
+
+    {% if error %}
+    <div
+        style="background: rgba(220, 38, 38, 0.2); border: 2px solid rgba(220, 38, 38, 0.5); color: #fecaca; padding: 15px; margin-bottom: 20px; box-shadow: 4px 4px 0px var(--shadow-color);">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.content }}
+
+        <button type="submit" class="btn btn-primary" style="float: right;">Post Anonymously</button>
+        <div style="clear: both;"></div>
+    </form>
+</div>
+{% endblock %}

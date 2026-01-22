@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krine</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'core/main.css' %}?v=10">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="{% url 'post_list' %}" class="logo">
+                <img src="{% static 'core/images/logo.png' %}" alt="Krine Logo">
+            </a>
+
+            <div class="nav-links">
+                <a href="{% url 'about' %}" class="nav-item">About</a>
+                <a href="{% url 'mission' %}" class="nav-item">Mission</a>
+                <a href="{% url 'faq' %}" class="nav-item">FAQ</a>
+
+                <div class="dropdown">
+                    <span class="nav-item">Legal & Compliance ▾</span>
+                    <div class="dropdown-content">
+                        <a href="{% url 'legal' %}">Terms & Privacy</a>
+                        <a href="{% url 'security' %}">Security</a>
+                        <a href="{% url 'safety' %}">Safety</a>
+                    </div>
+                </div>
+
+                <a href="{% url 'create_post' %}" class="btn btn-primary">+ New Post</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <h2 class="footer-logo">KRINE</h2>
+        <p>&copy; 2026 Krine. Anonymous & Safe.</p>
+    </footer>
+</body>
+
+</html>
