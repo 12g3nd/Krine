@@ -14,9 +14,16 @@
 
     <div class="post-footer" style="margin-bottom: 30px;">
         <span>{{ post.created_at|date:"F d, Y H:i" }}</span>
-        <a href="{% url 'like_post' pk=post.pk %}" class="btn btn-primary"
-            style="padding: 8px 16px; font-size: 0.9rem;">
-            ❤️ {{ post.like_count }} Likes
+        <a href="{% url 'like_post' pk=post.pk %}" class="action-link" style="font-size: 1.2rem;">
+            {% load static %}
+            {% if is_liked %}
+            <img src="{% static 'core/images/hearted.png' %}" alt="Like" class="action-icon"
+                style="width: 30px; height: 30px;">
+            {% else %}
+            <img src="{% static 'core/images/nothearted.png' %}" alt="Like" class="action-icon"
+                style="width: 30px; height: 30px;">
+            {% endif %}
+            <span style="color: var(--primary-color);">{{ post.like_count }} Likes</span>
         </a>
     </div>
 
@@ -39,4 +46,38 @@
         {% endfor %}
     </div>
 </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const likeBtn = document.querySelector('.action-link[href*="like"]');
+        if (likeBtn) {
+            likeBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const url = this.getAttribute('href');
+
+                fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        const icon = this.querySelector('img');
+                        const countSpan = this.querySelector('span');
+
+                        if (data.liked) {
+                            icon.src = "{% static 'core/images/hearted.png' %}";
+                        } else {
+                            icon.src = "{% static 'core/images/nothearted.png' %}";
+                        }
+
+                        // Maintain the styling text
+                        countSpan.textContent = data.count + ' Likes';
+                    })
+                    .catch(err => console.error('Error likely post:', err));
+            });
+        }
+    });
+</script>
 {% endblock %}

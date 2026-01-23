@@ -5,7 +5,18 @@ class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     content = models.TextField(blank=True)
     image = models.ImageField(upload_to='posts/', blank=True, null=True)
+    POST_TYPES = [
+        ('letter', 'Letter'),
+        ('poem', 'Poem'),
+        ('thought', 'Thought'),
+        ('confession', 'Confession'),
+        ('apology', 'Apology'),
+        ('unsent', 'Unsent'),
+        ('note', 'Note'),
+    ]
+
     created_at = models.DateTimeField(auto_now_add=True)
+    post_type = models.CharField(max_length=20, choices=POST_TYPES, default='thought')
     
     # Simple way to track if it's flagged by AI
     is_flagged = models.BooleanField(default=False)

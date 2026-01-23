@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="hero">
@@ -35,37 +36,192 @@
     {% endif %}
 </div>
 
-<div class="post-grid">
-    {% for post in posts %}
-    <div class="post-card">
-        <div class="post-content">
-            <p>{{ post.content|truncatechars:200 }}</p>
-        </div>
+<div style="display: flex; gap: 40px; align-items: flex-start;">
+    <aside style="width: 250px; flex-shrink: 0;" class="filter-section">
+        <div class="filter-title">Filter by Type</div>
+        <form method="get" id="filterForm">
+            <input type="hidden" name="sort" value="{{ current_sort }}">
+            <input type="hidden" name="time" value="{{ current_time }}">
+            <input type="hidden" name="q" value="{{ request.GET.q }}">
 
-        <div class="post-tags">
-            {% for tag in post.tags.all %}
-            <span class="tag">#{{ tag.name }}</span>
-            {% endfor %}
-        </div>
+            {% with s=selected_types %}
+            <!-- SHORT LINES -->
+            <label class="filter-checkbox">
+                <input type="checkbox" name="type" value="letter" {% if 'letter' in s %}checked{% endif %}>
+                Letter
+            </label>
+            <label class="filter-checkbox">
+                <input type="checkbox" name="type" value="poem" {% if 'poem' in s %}checked{% endif %}>
+                Poem
+            </label>
+            <label class="filter-checkbox">
+                <input type="checkbox" name="type" value="thought" {% if 'thought' in s %}checked{% endif %}>
+                Thought
+            </label>
+            <label class="filter-checkbox">
+                <input type="checkbox" name="type" value="confession" {% if 'confession' in s %}checked{% endif %}>
+                Confession
+            </label>
+            <label class="filter-checkbox">
+                <input type="checkbox" name="type" value="apology" {% if 'apology' in s %}checked{% endif %}>
+                Apology
+            </label>
+            <label class="filter-checkbox">
+                <input type="checkbox" name="type" value="unsent" {% if 'unsent' in s %}checked{% endif %}>
+                Unsent
+            </label>
+            <label class="filter-checkbox">
+                <input type="checkbox" name="type" value="note" {% if 'note' in s %}checked{% endif %}>
+                Note
+            </label>
+            {% endwith %}
 
-        <div class="post-footer">
-            <span class="date">{{ post.created_at|date:"M d" }}</span>
-            <div class="actions">
-                <a href="{% url 'post_detail' pk=post.pk %}" class="action-link">
-                    <span>💬 {{ post.comment_count }}</span>
-                </a>
-                <a href="{% url 'like_post' pk=post.pk %}" class="action-link">
-                    <span>❤️ {{ post.like_count }}</span>
-                </a>
+            <button type="submit" class="btn btn-primary"
+                style="width: 100%; margin-top: 10px; font-size: 0.8rem; padding: 10px;">Apply Filters</button>
+        </form>
+    </aside>
+
+    <div class="post-grid" style="flex-grow: 1;">
+        {% for post in posts %}
+        <div class="post-card">
+            <span class="post-type-tag">{{ post.get_post_type_display }}</span>
+
+            <div class="post-content">
+                <p>{{ post.content|truncatechars:200 }}</p>
             </div>
-        </div>
 
-        <a href="{% url 'post_detail' pk=post.pk %}" class="card-link"></a>
+            <div class="post-tags">
+                {% for tag in post.tags.all %}
+                <span class="tag">#{{ tag.name }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="post-footer">
+                <span class="date">{{ post.created_at|date:"M d" }}</span>
+                <div class="actions">
+                    <a href="{% url 'post_detail' pk=post.pk %}" class="action-link">
+                        <img src="{% static 'core/images/comment.png' %}" alt="Comment" class="action-icon">
+                        <span>{{ post.comment_count }}</span>
+                    </a>
+                    <a href="{% url 'like_post' pk=post.pk %}" class="action-link">
+                        {% if post.is_liked %}
+                        <img src="{% static 'core/images/hearted.png' %}" alt="Like" class="action-icon">
+                        {% else %}
+                        <img src="{% static 'core/images/nothearted.png' %}" alt="Like" class="action-icon">
+                        {% endif %}
+                        <span>{{ post.like_count }}</span>
+                    </a>
+                </div>
+            </div>
+
+            <a href="{% url 'post_detail' pk=post.pk %}" class="card-link"></a>
+        </div>
+        {% empty %}
+        <div class="empty-state">
+            <p>No thoughts found. Be the first to share.</p>
+        </div>
+        {% endfor %}
     </div>
-    {% empty %}
-    <div class="empty-state">
-        <p>No thoughts found. Be the first to share.</p>
-    </div>
-    {% endfor %}
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // --- 1. AJAX Likes ---
+        const postGrid = document.querySelector('.post-grid');
+
+        // Event delegation for like buttons (handles existing and new posts)
+        postGrid.addEventListener('click', function (e) {
+            const likeBtn = e.target.closest('.action-link');
+            // Check if it's a like button (href contains 'like')
+            if (likeBtn && likeBtn.getAttribute('href').includes('like')) {
+                e.preventDefault();
+                const url = likeBtn.getAttribute('href');
+
+                fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Update Icon and Count
+                        const icon = likeBtn.querySelector('img');
+                        const countSpan = likeBtn.querySelector('span');
+
+                        if (data.liked) {
+                            icon.src = "{% static 'core/images/hearted.png' %}";
+                        } else {
+                            icon.src = "{% static 'core/images/nothearted.png' %}";
+                        }
+                        countSpan.textContent = data.count;
+                    })
+                    .catch(err => console.error('Error liking post:', err));
+            }
+        });
+
+        // --- 2. AJAX Filtering & Sorting ---
+        const filterForm = document.getElementById('filterForm');
+        const sortLinks = document.querySelectorAll('.sort-options a');
+
+        function updateContent(url) {
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest' // Standard
+                }
+            })
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    // Replace Grid
+                    const newGrid = doc.querySelector('.post-grid');
+                    document.querySelector('.post-grid').innerHTML = newGrid.innerHTML;
+
+                    // Update Filters Bar (to show active sort)
+                    const newFiltersBar = doc.querySelector('.filters-bar');
+                    document.querySelector('.filters-bar').innerHTML = newFiltersBar.innerHTML;
+
+                    // Re-bind (if necessary) or just rely on delegation.
+                    // Note: Pagination/Sort links inside filters-bar need re-binding if we didn't delegate.
+                    // Since sort links are outside the replaced grid but inside filters-bar, we need to re-attach listeners to them.
+                    attachSortListeners();
+                })
+                .catch(err => console.error('Filter error:', err));
+        }
+
+        // Handle Filter Form Submit
+        filterForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const formData = new FormData(filterForm);
+            const queryString = new URLSearchParams(formData).toString();
+            const url = `?${queryString}`;
+
+            // pushState to update URL without reload
+            history.pushState(null, '', url);
+            updateContent(url);
+        });
+
+        // Handle Sort Links
+        function attachSortListeners() {
+            const currentSortLinks = document.querySelectorAll('.sort-options a');
+            currentSortLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const url = this.getAttribute('href');
+                    history.pushState(null, '', url);
+                    updateContent(url);
+                });
+            });
+        }
+
+        // Initial attach
+        attachSortListeners();
+
+        // Handle Back/Forward Browser Buttons
+        window.addEventListener('popstate', function () {
+            updateContent(window.location.search);
+        });
+    });
+</script>
 {% endblock %}

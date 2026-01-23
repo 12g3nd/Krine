@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.db.models import Count, Q
+from django.db.models import Count, Q, Exists, OuterRef
 from .models import Post, Comment, Reaction
 from .forms import PostForm, CommentForm
 from .ai_service import ai_analyzer
@@ -13,6 +13,11 @@ def post_list(request):
     time_filter = request.GET.get('time', 'all')
     
     posts = Post.objects.filter(is_flagged=False)
+
+    # Post Type Filter (supports multiple)
+    post_types = request.GET.getlist('type')
+    if post_types:
+        posts = posts.filter(post_type__in=post_types)
     
     # Time Filter
     if time_filter != 'all':
@@ -47,10 +52,23 @@ def post_list(request):
             Q(content__icontains=query) | Q(tags__name__icontains=query)
         ).distinct()
 
+    # Annotate with is_liked for current session
+    if not request.session.session_key:
+        request.session.create()
+    session_id = request.session.session_key
+
+    is_liked_subquery = Reaction.objects.filter(
+        post=OuterRef('pk'),
+        session_id=session_id,
+        reaction_type=Reaction.LIKE
+    )
+    posts = posts.annotate(is_liked=Exists(is_liked_subquery))
+    
     return render(request, 'core/post_list.html', {
         'posts': posts,
         'current_sort': sort_by,
-        'current_time': time_filter
+        'current_time': time_filter,
+        'selected_types': post_types
     })
 
 def static_page(request, page_name):
@@ -108,10 +126,22 @@ def post_detail(request, pk):
     else:
         comment_form = CommentForm()
 
+    # Check if liked
+    if not request.session.session_key:
+        request.session.create()
+    session_id = request.session.session_key
+    
+    is_liked = Reaction.objects.filter(
+        post=post,
+        session_id=session_id,
+        reaction_type=Reaction.LIKE
+    ).exists()
+
     return render(request, 'core/post_detail.html', {
         'post': post,
         'comments': comments,
-        'comment_form': comment_form
+        'comment_form': comment_form,
+        'is_liked': is_liked
     })
 
 def like_post(request, pk):
@@ -132,6 +162,17 @@ def like_post(request, pk):
     if not created:
         # If already liked, unlike (delete)
         reaction.delete()
+        is_liked = False
+    else:
+        is_liked = True
+
+    # Check for AJAX request
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        from django.http import JsonResponse
+        return JsonResponse({
+            'liked': is_liked,
+            'count': post.reactions.filter(reaction_type=Reaction.LIKE).count()
+        })
         
     # Return to previous page
     return redirect(request.META.get('HTTP_REFERER', 'post_list'))

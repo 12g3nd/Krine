@@ -14,7 +14,15 @@
     <form method="post">
         {% csrf_token %}
 
-        {{ form.content }}
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 10px; font-weight: 700;">Content</label>
+            {{ form.content }}
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <label style="display: block; margin-bottom: 10px; font-weight: 700;">Type of Thought</label>
+            {{ form.post_type }}
+        </div>
 
         <button type="submit" class="btn btn-primary" style="float: right;">Post Anonymously</button>
         <div style="clear: both;"></div>

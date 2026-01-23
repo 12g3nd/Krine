@@ -8,7 +8,8 @@ class AIContentAnalyzer:
     """
     
     def __init__(self):
-        self.model_name = "deepseek-ai/DeepSeek-V3.2" # Note: This is huge. User might need -Exp or quantized.
+        # Qwen-0.5B-Instruct is extremely lightweight (300MB-1GB RAM) and fast
+        self.model_name = "Qwen/Qwen2.5-0.5B-Instruct" 
         self.tokenizer = None
         self.model = None
         self._is_loaded = False
@@ -19,9 +20,6 @@ class AIContentAnalyzer:
 
         print(f"Loading AI Model: {self.model_name}...")
         try:
-            # Attempt to load with Actiual hardware support
-            # For 4-bit quantization (requires bitsandbytes, not installed yet, so standard load)
-            # We'll expect the user to have substantial RAM or we use mapped fallback
             self.tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True)
             self.model = AutoModelForCausalLM.from_pretrained(
                 self.model_name, 
