@@ -1,53 +1,101 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="container"
-    style="max-width: 800px; margin: 40px auto; background: white; padding: 40px; border: var(--border-width) solid var(--border-color); box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--border-color);">
+<div class="post-detail-container">
     <div class="static-content">
         {% if page_name == 'about' %}
-        <h2>About Krine</h2>
-        <p>Krine is a safe space for anonymous reflections. We believe that honesty thrives when identity is removed
-            from the equation. Our platform is designed to let you express your true thoughts without the pressure of a
-            persona.</p>
-        <p>Built with privacy at its core, Krine uses advanced AI moderation to keep the community safe while
-            maintaining your anonymity.</p>
+        <h2 style="margin-bottom: 20px; font-size: 2rem;">About Krine</h2>
+        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">Krine is a safe haven for anonymous words.
+            It exists as a thought experiment due to our key belief that honesty thrives when identity is removed from
+            the equation entirely. Our platform is designed to let you express your true thoughts without the pressure
+            of a persona or a mask.</p>
+        <p style="font-size: 1.1rem; line-height: 1.6;">Built with privacy at its very core, Krine uses advanced
+            moderation to keep the community safe while maintaining your anonymity. Write whatever comes to mind and see
+            what others write.</p>
 
         {% elif page_name == 'mission' %}
-        <h2>Our Mission</h2>
-        <p>To connect humanity through shared, unfiltered, and anonymous experiences.</p>
-        <p>We strive to build a corner of the internet where you can be yourself—completely unmasked. We value:</p>
-        <ul>
-            <li><strong>Anonymity:</strong> Your identity is your own.</li>
-            <li><strong>Safety:</strong> A toxic-free environment powered by smart moderation.</li>
-            <li><strong>Simplicity:</strong> No distractions, just thoughts.</li>
-        </ul>
+        <h2 style="margin-bottom: 20px; font-size: 2rem;">Our Mission</h2>
+        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">To connect humanity through shared,
+            unfiltered, and anonymous experiences.</p>
+        <p style="font-size: 1.1rem; line-height: 1.6;">We strive to carve out a small niche within the internet where
+            you can be yourself. We pride ourselves on three key values: anonymity, safety, and simplicity. Krine is a
+            place where you are not afraid and not alone.</p>
 
         {% elif page_name == 'faq' %}
-        <h2>Frequently Asked Questions</h2>
-        <h3>Is it really anonymous?</h3>
-        <p>Yes. We do not require account creation. We do not track your IP for marketing purposes. We use basic session
-            IDs only to prevent spam and handle likes, but these are transient.</p>
-        <h3>How do you moderate content?</h3>
-        <p>We use a locally running AI model (DistilBERT) to scan every post for toxicity, hate speech, and
-            inappropriate content before it goes live.</p>
+        <h2 style="margin-bottom: 20px; font-size: 2rem;">Frequently Asked Questions</h2>
+        <h3 style="margin-top: 20px; margin-bottom: 10px;">Is it really anonymous?</h3>
+        <p style="font-size: 1.1rem; line-height: 1.6;">Yes. We do not require account creation. We do not track your IP
+            for marketing purposes. We use basic session IDs only to prevent spam and handle likes, but these are
+            transient.</p>
+        <h3 style="margin-top: 20px; margin-bottom: 10px;">How do you moderate content?</h3>
+        <p style="font-size: 1.1rem; line-height: 1.6;">We use a locally running AI model (DistilBERT) to scan every
+            post for toxicity, hate speech, and inappropriate content before it goes live.</p>
 
         {% elif page_name == 'legal' %}
-        <h2>Terms & Privacy</h2>
-        <p>By using Krine, you agree to treat others with respect. We reserve the right to remove any content that
-            violates common decency or legal statutes.</p>
-        <p><strong>Privacy:</strong> We don't want your data. We don't collect your email, phone number, or real name.
+        <h2 style="margin-bottom: 20px; font-size: 2rem;">Terms & Privacy</h2>
+
+        <h3 style="margin-top: 25px; margin-bottom: 10px; color: var(--primary-color);">Terms of Service</h3>
+        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 15px;">By accessing specific features of Krine,
+            you agree to these terms. Krine is a platform for anonymous expression, but it is not a lawless zone.</p>
+        <ul style="margin-left: 20px; margin-bottom: 20px; font-size: 1.1rem; line-height: 1.6;">
+            <li><strong>Respect:</strong> Hate speech, bullying, and harassment are strictly prohibited.</li>
+            <li><strong>Legality:</strong> Content promoting illegal acts, violence, or self-harm will be removed
+                immediately.</li>
+            <li><strong>Rights:</strong> You retain ownership of your words, but you grant Krine a license to display
+                them anonymously.</li>
+        </ul>
+
+        <h3 style="margin-top: 25px; margin-bottom: 10px; color: var(--primary-color);">Privacy Policy</h3>
+        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 15px;">Our privacy philosophy is simple:
+            <strong>We cannot lose data we do not have.</strong>
         </p>
+        <ul style="margin-left: 20px; font-size: 1.1rem; line-height: 1.6;">
+            <li><strong>No Accounts:</strong> We do not ask for your email, name, or phone number.</li>
+            <li><strong>No Tracking:</strong> We do not use third-party analytics or tracking pixels.</li>
+            <li><strong>Transient Data:</strong> Session IDs are used solely to prevent spam and allow for interaction
+                (likes/reports) within a single browser session.</li>
+        </ul>
 
         {% elif page_name == 'security' %}
-        <h2>Security</h2>
-        <p>We implement standard security practices to ensure the platform remains available and safe. However, as an
-            anonymous platform, the best security is the lack of personal data collection.</p>
+        <h2 style="margin-bottom: 20px; font-size: 2rem;">Security</h2>
+        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">We take the security of your (anonymous)
+            data seriously. Our architecture is designed to minimize risk at every level.</p>
+
+        <h3 style="margin-top: 25px; margin-bottom: 10px; color: var(--primary-color);">Encryption</h3>
+        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 15px;">All traffic between your device and Krine
+            is encrypted using industry-standard TLS (Transport Layer Security). This ensures that your ISP or local
+            network administrator cannot read the content of your posts.</p>
+
+        <h3 style="margin-top: 25px; margin-bottom: 10px; color: var(--primary-color);">Minimal Logging</h3>
+        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 15px;">We configure our servers to discard IP logs
+            after a short rotation period. We do not store IP addresses alongside posts in our database, making it
+            mathematically impossible to link a specific post to a specific user from our database alone.</p>
 
         {% elif page_name == 'safety' %}
-        <h2>Safety Center</h2>
-        <p>If you or someone you know is in immediate danger, please contact local emergency services. Krine is not a
-            replacement for professional help.</p>
-        <p>If you see content that slipped through our filters, please report it (feature coming soon).</p>
+        <h2 style="margin-bottom: 20px; font-size: 2rem;">Safety Center</h2>
+        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">Krine is built for vulnerability, which
+            requires a foundation of safety. We combine automated tools with community power to maintain this
+            environment.</p>
+
+        <div
+            style="background: rgba(34, 211, 238, 0.1); border-left: 4px solid var(--primary-color); padding: 20px; margin-bottom: 30px;">
+            <h3 style="margin-top: 0; margin-bottom: 10px; color: var(--primary-color);">Crisis Resources</h3>
+            <p style="font-size: 1.1rem; line-height: 1.6;">Krine is not a replacement for professional help. If you or
+                someone you know is in immediate danger or severe distress, please contact local emergency services
+                immediately.</p>
+        </div>
+
+        <h3 style="margin-top: 25px; margin-bottom: 10px; color: var(--primary-color);">Our Approach</h3>
+        <ul style="margin-left: 20px; font-size: 1.1rem; line-height: 1.6;">
+            <li style="margin-bottom: 10px;"><strong>AI Moderation:</strong> Every post is scanned by an AI model
+                trained to detect toxicity and hate speech before it is published.</li>
+            <li style="margin-bottom: 10px;"><strong>Community Reporting:</strong> Use the <img
+                    src="{% static 'core/images/report.png' %}" style="width: 16px; display: inline;" alt="flag"> icon
+                on any post to alert our admins to inappropriate content.</li>
+            <li><strong>Zero Tolerance:</strong> We have a zero-tolerance policy for harassment. Violating posts are
+                deleted permanently.</li>
+        </ul>
 
         {% else %}
         <h2>Page Not Found</h2>

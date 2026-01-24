@@ -103,24 +103,42 @@ a:hover {
     display: none;
     position: absolute;
     right: 0;
+    top: 100%;
     background-color: var(--bg-color);
     min-width: 200px;
     border: 2px solid var(--glass-border);
     box-shadow: 6px 6px 0px var(--shadow-color);
-    z-index: 1;
+    z-index: 1000;
     margin-top: 10px;
+    /* Kept for visual spacing */
+}
+
+/* Invisible Bridge */
+.dropdown-content::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    /* Covers the 10px margin plus extra */
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background: transparent;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
+/* Ensure links are on top of everything inside */
 .dropdown-content a {
     color: var(--text-color);
     padding: 12px 16px;
     text-decoration: none;
     display: block;
     border-bottom: 1px solid var(--glass-border);
+    position: relative;
+    z-index: 10;
+    background: var(--bg-color);
 }
 
 .dropdown-content a:last-child {
@@ -285,6 +303,7 @@ a:hover {
 }
 
 .post-content p {
+    white-space: pre-wrap;
     font-size: 1.2rem;
     line-height: 1.6;
     margin-bottom: 20px;
@@ -468,4 +487,36 @@ footer {
 .filter-checkbox input {
     margin-right: 10px;
     accent-color: var(--primary-color);
+}
+
+/* Notification Styles */
+.notification-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--pink-color);
+    cursor: pointer;
+}
+
+.notification-btn:hover {
+    color: var(--primary-color);
+}
+
+.badge {
+    position: absolute;
+    top: -10px;
+    right: -15px;
+    background-color: #ef4444;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 2px 5px;
+    border: 1px solid #000;
+    box-shadow: 2px 2px 0px #000;
 }

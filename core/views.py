@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Count, Q, Exists, OuterRef
-from .models import Post, Comment, Reaction
+from .models import Post, Comment, Reaction, Report
 from .forms import PostForm, CommentForm
 from .ai_service import ai_analyzer
 
@@ -105,6 +105,12 @@ def create_post(request):
                 from .models import Tag
                 tag, _ = Tag.objects.get_or_create(name=tag_name)
                 post.tags.add(tag)
+
+            # Track for notifications
+            my_posts = request.session.get('my_posts', [])
+            my_posts.append(str(post.id))
+            request.session['my_posts'] = my_posts
+            request.session.modified = True
                 
             return redirect('post_list')
     else:
@@ -180,3 +186,47 @@ def like_post(request, pk):
 def add_comment(request, pk):
     # Handled in post_detail usually, but if called directly:
     return redirect('post_detail', pk=pk)
+
+def report_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    
+    if request.method == 'POST':
+        reason = request.POST.get('reason', 'other')
+        if not request.session.session_key:
+            request.session.create()
+        session_id = request.session.session_key
+        
+        # Prevent duplicate reports from same session
+        if not Report.objects.filter(post=post, session_id=session_id).exists():
+            Report.objects.create(
+                post=post,
+                reason=reason,
+                session_id=session_id
+            )
+        
+        # Determine redirect (AJAX vs Standard)
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            from django.http import JsonResponse
+            return JsonResponse({'status': 'reported'})
+            
+    return redirect(request.META.get('HTTP_REFERER', 'post_list'))
+
+# Helper for context processor
+def get_notification_count(request):
+    if not request.session.get('my_posts'):
+        return 0
+    
+    my_post_ids = request.session.get('my_posts', [])
+    total_comments = Comment.objects.filter(post__id__in=my_post_ids).count()
+    last_seen = request.session.get('last_seen_comments_count', 0)
+    
+    return max(0, total_comments - last_seen)
+
+def clear_notifications(request):
+    if request.method == 'POST':
+        my_post_ids = request.session.get('my_posts', [])
+        total_comments = Comment.objects.filter(post__id__in=my_post_ids).count()
+        request.session['last_seen_comments_count'] = total_comments
+        request.session.modified = True
+        return redirect(request.META.get('HTTP_REFERER', 'post_list'))
+    return redirect('post_list')

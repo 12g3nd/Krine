@@ -2,6 +2,8 @@
 
 {% block content %}
 <div class="post-form-container">
+    <a href="{% url 'post_list' %}"
+        style="display: inline-block; margin-bottom: 20px; font-weight: 700; font-size: 1.1rem;">&larr; Back to Feed</a>
     <h2 style="margin-bottom: 20px; font-size: 2rem;">Write something</h2>
 
     {% if error %}
@@ -24,8 +26,7 @@
             {{ form.post_type }}
         </div>
 
-        <button type="submit" class="btn btn-primary" style="float: right;">Post Anonymously</button>
-        <div style="clear: both;"></div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Post Anonymously</button>
     </form>
 </div>
 {% endblock %}

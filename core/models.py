@@ -61,3 +61,18 @@ class Reaction(models.Model):
 
     class Meta:
         unique_together = ('post', 'session_id', 'reaction_type')
+
+class Report(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='reports')
+    reason = models.CharField(max_length=100, choices=[
+        ('spam', 'Spam'),
+        ('hate', 'Hate Speech'),
+        ('harassment', 'Harassment'),
+        ('inappropriate', 'Inappropriate Content'),
+        ('other', 'Other'),
+    ], default='spam')
+    session_id = models.CharField(max_length=100, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Report on {self.post.id} - {self.reason}"

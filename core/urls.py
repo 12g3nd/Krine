@@ -7,6 +7,8 @@ urlpatterns = [
     path('post/<uuid:pk>/', views.post_detail, name='post_detail'),
     path('post/<uuid:pk>/like/', views.like_post, name='like_post'),
     path('post/<uuid:pk>/comment/', views.add_comment, name='add_comment'),
+    path('post/<uuid:pk>/report/', views.report_post, name='report_post'),
+    path('notifications/clear/', views.clear_notifications, name='clear_notifications'),
 
     # Static Pages
     path('about/', views.static_page, {'page_name': 'about'}, name='about'),

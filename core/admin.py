@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment, Reaction, Tag
+from .models import Post, Comment, Reaction, Tag, Report
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
@@ -25,3 +25,9 @@ class TagAdmin(admin.ModelAdmin):
 class ReactionAdmin(admin.ModelAdmin):
     list_display = ('post', 'reaction_type', 'created_at')
     list_filter = ('reaction_type',)
+
+@admin.register(Report)
+class ReportAdmin(admin.ModelAdmin):
+    list_display = ('post', 'reason', 'created_at', 'session_id')
+    list_filter = ('reason', 'created_at')
+    search_fields = ('post__content', 'reason')
