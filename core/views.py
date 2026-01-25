@@ -95,8 +95,15 @@ def static_page(request, page_name):
     context = {'page_name': page_name}
     return render(request, 'core/static_page.html', context)
 
-@ratelimit(key='ip', rate='5/m', block=True)
+@ratelimit(key='ip', rate='5/m', block=False)
 def create_post(request):
+    # Check if rate limited
+    if getattr(request, 'limited', False):
+        return render(request, 'core/create_post.html', {
+            'form': PostForm(),
+            'error': "You are posting too fast. Please wait a moment."
+        })
+
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():

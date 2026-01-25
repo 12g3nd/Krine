@@ -70,12 +70,6 @@ class AIContentAnalyzer:
                 "tags": []
             }
 
-        if self.phone_pattern.search(text):
-             return {
-                "is_safe": False,
-                "flag_reason": "Contains Phone Number",
-                "tags": []
-            }
 
         # API Path
         if self.use_api:
