@@ -29,8 +29,9 @@
             for marketing purposes. We use basic session IDs only to prevent spam and handle likes, but these are
             transient.</p>
         <h3 style="margin-top: 20px; margin-bottom: 10px;">How do you moderate content?</h3>
-        <p style="font-size: 1.1rem; line-height: 1.6;">We use a locally running AI model (DistilBERT) to scan every
-            post for toxicity, hate speech, and inappropriate content before it goes live.</p>
+        <p style="font-size: 1.1rem; line-height: 1.6;">We use a smart **Zero-Shot AI** model to analyze every post. It
+            intelligently assigns emotional "vibes" (like *Nostalgic*, *Venting*, or *Hopeful*) and filters out hate
+            speech without blocking your freedom to express difficult emotions.</p>
 
         {% elif page_name == 'legal' %}
         <h2 style="margin-bottom: 20px; font-size: 2rem;">Terms & Privacy</h2>
@@ -88,8 +89,9 @@
 
         <h3 style="margin-top: 25px; margin-bottom: 10px; color: var(--primary-color);">Our Approach</h3>
         <ul style="margin-left: 20px; font-size: 1.1rem; line-height: 1.6;">
-            <li style="margin-bottom: 10px;"><strong>AI Moderation:</strong> Every post is scanned by an AI model
-                trained to detect toxicity and hate speech before it is published.</li>
+            <li style="margin-bottom: 10px;"><strong>AI Moderation:</strong> We use a **Zero-Shot Classification**
+                system to detect intent, ensuring we catch actual hate speech while allowing venting and raw emotion.
+            </li>
             <li style="margin-bottom: 10px;"><strong>Community Reporting:</strong> Use the <img
                     src="{% static 'core/images/report.png' %}" style="width: 16px; display: inline;" alt="flag"> icon
                 on any post to alert our admins to inappropriate content.</li>

@@ -2,6 +2,12 @@
 {% load static %}
 
 {% block content %}
+<style>
+    .pending-post {
+        opacity: 0.6;
+        border: 1px dashed var(--accent-color);
+    }
+</style>
 <div class="hero">
     <h1>Honest thoughts, <span class="highlight"><em>anonymously</em>.</span></h1>
     <p>No login. Well moderated. Pure connection.</p>
@@ -36,55 +42,67 @@
     {% endif %}
 </div>
 
-<div style="display: flex; gap: 40px; align-items: flex-start;">
-    <aside style="width: 250px; flex-shrink: 0;" class="filter-section">
-        <div class="filter-title">Filter by Type</div>
-        <form method="get" id="filterForm">
+<div class="content-wrapper">
+    <aside class="filter-section">
+        <div class="filter-header">
+            <div class="filter-title">Filter by Type</div>
+            <!-- Mobile Toggle for Filters -->
+            <button type="button" class="filter-toggle-btn"
+                onclick="document.querySelector('.filter-chips-container').classList.toggle('active')">
+                <span>Filter</span> ▾
+            </button>
+        </div>
+
+        <form method="get" id="filterForm" class="filter-form">
             <input type="hidden" name="sort" value="{{ current_sort }}">
             <input type="hidden" name="time" value="{{ current_time }}">
             <input type="hidden" name="q" value="{{ request.GET.q }}">
 
-            {% with s=selected_types %}
-            <!-- SHORT LINES -->
-            <label class="filter-checkbox">
-                <input type="checkbox" name="type" value="letter" {% if 'letter' in s %}checked{% endif %}>
-                Letter
-            </label>
-            <label class="filter-checkbox">
-                <input type="checkbox" name="type" value="poem" {% if 'poem' in s %}checked{% endif %}>
-                Poem
-            </label>
-            <label class="filter-checkbox">
-                <input type="checkbox" name="type" value="thought" {% if 'thought' in s %}checked{% endif %}>
-                Thought
-            </label>
-            <label class="filter-checkbox">
-                <input type="checkbox" name="type" value="confession" {% if 'confession' in s %}checked{% endif %}>
-                Confession
-            </label>
-            <label class="filter-checkbox">
-                <input type="checkbox" name="type" value="apology" {% if 'apology' in s %}checked{% endif %}>
-                Apology
-            </label>
-            <label class="filter-checkbox">
-                <input type="checkbox" name="type" value="unsent" {% if 'unsent' in s %}checked{% endif %}>
-                Unsent
-            </label>
-            <label class="filter-checkbox">
-                <input type="checkbox" name="type" value="note" {% if 'note' in s %}checked{% endif %}>
-                Note
-            </label>
-            {% endwith %}
+            <div class="filter-chips-container">
+                {% with s=selected_types %}
+                <label class="filter-chip">
+                    <input type="checkbox" name="type" value="letter" {% if 'letter' in s %}checked{% endif %}>
+                    <span>Letter</span>
+                </label>
+                <label class="filter-chip">
+                    <input type="checkbox" name="type" value="poem" {% if 'poem' in s %}checked{% endif %}>
+                    <span>Poem</span>
+                </label>
+                <label class="filter-chip">
+                    <input type="checkbox" name="type" value="thought" {% if 'thought' in s %}checked{% endif %}>
+                    <span>Thought</span>
+                </label>
+                <label class="filter-chip">
+                    <input type="checkbox" name="type" value="confession" {% if 'confession' in s %}checked{% endif %}>
+                    <span>Confession</span>
+                </label>
+                <label class="filter-chip">
+                    <input type="checkbox" name="type" value="apology" {% if 'apology' in s %}checked{% endif %}>
+                    <span>Apology</span>
+                </label>
+                <label class="filter-chip">
+                    <input type="checkbox" name="type" value="unsent" {% if 'unsent' in s %}checked{% endif %}>
+                    <span>Unsent</span>
+                </label>
+                <label class="filter-chip">
+                    <input type="checkbox" name="type" value="note" {% if 'note' in s %}checked{% endif %}>
+                    <span>Note</span>
+                </label>
+                {% endwith %}
 
-            <button type="submit" class="btn btn-primary"
-                style="width: 100%; margin-top: 10px; font-size: 0.8rem; padding: 10px;">Apply Filters</button>
+                <button type="submit" class="apply-filters-btn">Apply</button>
+            </div>
         </form>
     </aside>
 
-    <div class="post-grid" style="flex-grow: 1;">
+    <div class="post-grid">
         {% for post in posts %}
-        <div class="post-card">
+        <div class="post-card {% if not post.is_analyzed %}pending-post{% endif %}">
             <span class="post-type-tag">{{ post.get_post_type_display }}</span>
+            {% if not post.is_analyzed %}
+            <span class="pending-badge"
+                style="background:var(--accent-color); color:#000; padding:2px 8px; border-radius:12px; font-size:0.8rem; font-weight:bold; margin-left:8px;">Analyzing...</span>
+            {% endif %}
 
             <div class="post-content">
                 <p>{{ post.content|truncatechars:200 }}</p>

@@ -4,14 +4,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Krine</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'core/main.css' %}?v=13">
+    <link rel="stylesheet" href="{% static 'core/main.css' %}?v=14">
 </head>
 
 <body>
@@ -20,6 +20,16 @@
             <a href="{% url 'post_list' %}" class="logo">
                 <img src="{% static 'core/images/logo.png' %}" alt="Krine Logo">
             </a>
+
+            <!-- Mobile Actions Container -->
+            <div class="mobile-actions">
+                <a href="{% url 'create_post' %}" class="btn btn-primary mobile-new-post">+ Post</a>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
 
             <div class="nav-links">
                 <a href="{% url 'about' %}" class="nav-item">About</a>
@@ -35,10 +45,32 @@
                     </div>
                 </div>
 
-                <a href="{% url 'create_post' %}" class="btn btn-primary">+ New Post</a>
+                <a href="{% url 'create_post' %}" class="btn btn-primary desktop-new-post">+ New Post</a>
             </div>
         </div>
     </nav>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+            });
+        }
+
+        // Close menu/reset when clicking links
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
 
     <main class="container main-content">
         {% block content %}{% endblock %}

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+import threading
 from django.db.models import Count, Q, Exists, OuterRef
 from .models import Post, Comment, Reaction, Report
 from .forms import PostForm, CommentForm
@@ -6,13 +7,26 @@ from .ai_service import ai_analyzer
 
 from django.utils import timezone
 from datetime import timedelta
+from django_ratelimit.decorators import ratelimit
+from django.core.exceptions import PermissionDenied
 
 def post_list(request):
     # Sorting and Filtering
     sort_by = request.GET.get('sort', 'newest')
     time_filter = request.GET.get('time', 'all')
     
-    posts = Post.objects.filter(is_flagged=False)
+    my_posts = request.session.get('my_posts', [])
+    
+    # Show:
+    # 1. Flagged=False AND Analyzed=True (Public safe posts)
+    # 2. OR: ID in my_posts (My posts, even if unanalyzed or flagged - though maybe hide flagged?)
+    # Let's show my posts if they are NOT flagged yet. If flagged, they disappear.
+    # But if unanalyzed, they show up.
+    
+    posts = Post.objects.filter(
+        (Q(is_flagged=False) & Q(is_analyzed=True)) | 
+        (Q(id__in=my_posts) & Q(is_flagged=False))
+    ).distinct()
 
     # Post Type Filter (supports multiple)
     post_types = request.GET.getlist('type')
@@ -81,30 +95,18 @@ def static_page(request, page_name):
     context = {'page_name': page_name}
     return render(request, 'core/static_page.html', context)
 
+@ratelimit(key='ip', rate='5/m', block=True)
 def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            post = form.save(commit=False)
+            # Save immediately (is_analyzed=False by default)
+            post = form.save()
             
-            # AI Analysis
-            analysis = ai_analyzer.analyze_post(post.content, post.image)
-            
-            if not analysis['is_safe']:
-                # Reject or flag (User wanted "filters out", so maybe just don't save or save as flagged)
-                # Let's save as flagged and show a message (or just silently fail/redirect)
-                post.is_flagged = True
-                post.save()
-                # Ideally, give feedback
-                return render(request, 'core/create_post.html', {'form': form, 'error': analysis['flag_reason']})
-            
-            post.save()
-            
-            # Add tags
-            for tag_name in analysis['tags']:
-                from .models import Tag
-                tag, _ = Tag.objects.get_or_create(name=tag_name)
-                post.tags.add(tag)
+            # Start AI Analysis in Background Thread
+            thread = threading.Thread(target=ai_analyzer.analyze_and_tag_post_background, args=(post.id,))
+            thread.daemon = True 
+            thread.start()
 
             # Track for notifications
             my_posts = request.session.get('my_posts', [])
@@ -150,6 +152,7 @@ def post_detail(request, pk):
         'is_liked': is_liked
     })
 
+@ratelimit(key='ip', rate='20/m', block=True)
 def like_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     
@@ -183,10 +186,12 @@ def like_post(request, pk):
     # Return to previous page
     return redirect(request.META.get('HTTP_REFERER', 'post_list'))
 
+@ratelimit(key='ip', rate='5/m', block=True)
 def add_comment(request, pk):
     # Handled in post_detail usually, but if called directly:
     return redirect('post_detail', pk=pk)
 
+@ratelimit(key='ip', rate='5/m', block=True)
 def report_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     

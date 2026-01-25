@@ -19,7 +19,10 @@ class Post(models.Model):
     post_type = models.CharField(max_length=20, choices=POST_TYPES, default='thought')
     
     # Simple way to track if it's flagged by AI
+    # Simple way to track if it's flagged by AI
     is_flagged = models.BooleanField(default=False)
+    # Track if AI analysis is complete (Hidden until True)
+    is_analyzed = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Post {self.id}..."
