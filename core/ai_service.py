@@ -1,5 +1,8 @@
 import random
 import re
+import os
+import requests
+import json
 from transformers import pipeline
 
 class AIContentAnalyzer:
@@ -32,6 +35,11 @@ class AIContentAnalyzer:
         # Added "Personal Information" and "Harassment"
         self.safety_categories = ["Safe", "Hate Speech", "Violence", "Harassment", "Personal Information"]
 
+        # API Configuration
+        self.use_api = os.getenv('USE_AI_API', 'False').lower() == 'true'
+        self.api_url = "https://api-inference.huggingface.co/models/valhalla/distilbart-mnli-12-3"
+        self.api_token = os.getenv('HUGGINGFACE_API_KEY')
+
     def load_model(self):
         if self._is_loaded:
             return
@@ -62,6 +70,21 @@ class AIContentAnalyzer:
                 "tags": []
             }
 
+        if self.phone_pattern.search(text):
+             return {
+                "is_safe": False,
+                "flag_reason": "Contains Phone Number",
+                "tags": []
+            }
+
+        # API Path
+        if self.use_api:
+            if not self.api_token:
+                print("WARNING: USE_AI_API is True but HUGGINGFACE_API_KEY is missing.")
+                return self._fallback_analyze(text)
+            return self._analyze_via_api(text)
+
+        # Local Path
         if not self._is_loaded:
             self.load_model()
         
@@ -149,6 +172,84 @@ class AIContentAnalyzer:
             'flag_reason': None if is_safe else "Automated keyword flag (Fallback)",
             'tags': tags
         }
+
+    def _analyze_via_api(self, text):
+        """
+        Analyze using HuggingFace Inference API to save RAM.
+        """
+        headers = {"Authorization": f"Bearer {self.api_token}"}
+        
+        # We need two calls: one for Safety, one for Tags.
+        # Zero-shot API format usually returns scores for labels.
+        
+        try:
+            # 1. Safety Check
+            payload_safety = {
+                "inputs": text,
+                "parameters": {"candidate_labels": self.safety_categories}
+            }
+            response = requests.post(self.api_url, headers=headers, json=payload_safety)
+            
+            if response.status_code != 200:
+                print(f"API Error (Safety): {response.status_code} - {response.text}")
+                # If model is loading (503), we might want to retry, but for now fallback.
+                return self._fallback_analyze(text)
+                
+            safety_data = response.json()
+            # safety_data is generic, might be dict or list depending on endpoint version.
+            # Usually: {'sequence': '...', 'labels': [...], 'scores': [...]}
+            
+            if 'labels' not in safety_data:
+                 print(f"API Unexpected Response: {safety_data}")
+                 return self._fallback_analyze(text)
+                 
+            scores = {label: score for label, score in zip(safety_data['labels'], safety_data['scores'])}
+
+            safe_score = scores.get('Safe', 0.0)
+            
+            is_safe = True
+            flag_reason = None
+            
+            # Reusing original logic
+            if safe_score < 0.03: 
+                 is_safe = False
+                 flag_reason = f"Extremely Low Safety Score ({int(safe_score*100)}%)"
+            elif scores.get('Harassment', 0) > (safe_score * 3) and scores.get('Harassment', 0) > 0.1:
+                 is_safe = False
+                 flag_reason = f"Potential Harassment"
+            elif scores.get('Violence', 0) > 0.8:
+                 is_safe = False
+                 flag_reason = "Violence Detected"
+            elif scores.get('Hate Speech', 0) > 0.8:
+                 is_safe = False
+                 flag_reason = "Hate Speech Detected"
+            elif scores.get('Personal Information', 0) > 0.5:
+                 is_safe = False
+                 flag_reason = "Personal Info Detected"
+
+            # 2. Tagging (only if safe, or independent?)
+            # Let's get tags anyway
+            payload_tags = {
+                "inputs": text,
+                "parameters": {"candidate_labels": self.candidate_labels}
+            }
+            response_tags = requests.post(self.api_url, headers=headers, json=payload_tags)
+             
+            tags = []
+            if response_tags.status_code == 200:
+                tag_data = response_tags.json()
+                if 'labels' in tag_data:
+                    tags = tag_data['labels'][:3]
+            
+            return {
+                "is_safe": is_safe,
+                "flag_reason": flag_reason,
+                "tags": tags
+            }
+
+        except Exception as e:
+            print(f"API Request Failed: {e}")
+            return self._fallback_analyze(text)
 
     def analyze_and_tag_post_background(self, post_id):
         """

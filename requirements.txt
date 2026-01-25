@@ -7,3 +7,11 @@ django-ratelimit
 dj-database-url
 psycopg2-binary
 python-dotenv
+requests
+gunicorn
+django-storages
+boto3
+redis
+hiredis
+sentry-sdk
+django-redis
