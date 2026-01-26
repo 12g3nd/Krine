@@ -17,9 +17,13 @@ RUN apt-get update && apt-get install -y \
 
 # Install python dependencies
 COPY requirements.txt /app/
-RUN pip install --upgrade pip
-RUN pip install gunicorn psycopg2-binary
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip --no-cache-dir
+RUN pip install gunicorn psycopg2-binary --no-cache-dir
+
+# Install CPU-only PyTorch (Significantly smaller than default)
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy project
 COPY . /app/
