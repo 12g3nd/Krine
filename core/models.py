@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.utils import timezone
 
 class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -15,7 +16,7 @@ class Post(models.Model):
         ('note', 'Note'),
     ]
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=timezone.now)
     post_type = models.CharField(max_length=20, choices=POST_TYPES, default='thought')
     
     # Simple way to track if it's flagged by AI

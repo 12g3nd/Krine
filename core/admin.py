@@ -6,7 +6,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ('id', 'created_at', 'like_count', 'comment_count', 'is_flagged')
     list_filter = ('created_at', 'is_flagged')
     search_fields = ('content', 'id')
-    readonly_fields = ('id', 'created_at')
+    readonly_fields = ('id',)
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
