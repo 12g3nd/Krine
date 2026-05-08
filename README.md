@@ -20,41 +20,6 @@ Krine is a thought experiment about what an anonymous social platform could look
 *   **AI/ML**: PyTorch, Transformers (Hugging Face)
 *   **Database**: SQLite (Default) / PostgreSQL-ready
 
-## Getting Started
-
-### Prerequisites
-
-*   Python 3.10 or higher
-*   Git
-
-### Installation
-
-1.  **Clone the repository**
-    ```bash
-    git clone https://github.com/yourusername/Krine.git
-    cd Krine
-    ```
-
-2.  **Install Dependencies**
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-3.  **Run Migrations**
-    Initialize the database:
-    ```bash
-    python manage.py migrate
-    ```
-
-4.  **Start the Server**
-    ```bash
-    python manage.py runserver
-    ```
-
-5.  **Access the App**
-    Open your browser and navigate to:
-    [http://127.0.0.1:8000](http://127.0.0.1:8000)
-
 ## AI Setup
 
 The project uses the `deepseek-ai/DeepSeek-V3.2` model via the `transformers` library.
