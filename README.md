@@ -20,11 +20,9 @@ Krine is a thought experiment about what an anonymous social platform could look
 *   **AI/ML**: PyTorch, Transformers (Hugging Face)
 *   **Database**: SQLite (Default) / PostgreSQL-ready
 
-## AI Setup
+## AI Note
 
-The project uses the `deepseek-ai/DeepSeek-V3.2` model via the `transformers` library.
-*   **Note**: The first time you run the server or create a post, the model will be downloaded. This requires a stable internet connection and sufficient RAM/VRAM.
-*   **Configuration**: Check `core/ai_service.py` to adjust model settings or implementation details.
+The project was created using a lot of help from Antigravity.
 
 ## License
 
