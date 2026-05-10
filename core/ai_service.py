@@ -111,8 +111,8 @@ class AIContentAnalyzer:
 
             # 2. Harassment Ratio Check (Catching Targeted Attacks)
             # Targeted attacks have a high Harassment-to-Safe ratio.
-            # "I hate person": Harassment(0.20) / Safe(0.02) = 10.0
-            # "I hate carrots": Harassment(0.09) / Safe(0.12) = 0.75
+            # "I hate <person_name>": Harassment(0.20) / Safe(0.02) = 10.0
+            # "I hate carrots":       Harassment(0.09) / Safe(0.12) = 0.75
             elif scores.get('Harassment', 0) > (safe_score * 3) and scores.get('Harassment', 0) > 0.1:
                  is_safe = False
                  flag_reason = f"Potential Harassment (Ratio {scores.get('Harassment',0)/safe_score:.1f})"

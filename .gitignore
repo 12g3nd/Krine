@@ -6,13 +6,34 @@ __pycache__/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+*.sqlite3
 media/
+/static/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# AI / model caches
+hf_cache/
+.cache/
+
+# Python tooling
+*.egg-info/
+.pytest_cache/
+.coverage
+.tox/
 
 # Virtual Env
 venv/
 env/
-.env
+.venv/
 
 # IDE
 .vscode/
 .idea/
+
+# OS
+.DS_Store
+Thumbs.db
