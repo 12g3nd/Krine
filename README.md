@@ -55,5 +55,4 @@ Pull requests are welcome. To keep things sane:
 
 Krine is released under the [MIT License](LICENSE).
 
-Made with love
-- sj
+Made with love by sj
