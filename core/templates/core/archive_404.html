@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="post-detail-container archive-static-container">
+    <div class="archive-kicker">ARCHIVE / UNCATALOGUED PATH</div>
+    <h2 class="archive-page-title">Nothing was preserved here.</h2>
+    <p class="archive-page-lede">
+        This address is not part of the sealed Krine record. The network is read-only, so there is no live application to resolve or create it.
+    </p>
+    <a href="{% url 'post_list' %}" class="archive-back-link">&larr; Return to the archive</a>
+</div>
+{% endblock %}

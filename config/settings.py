@@ -35,6 +35,15 @@ if os.getenv('BEHIND_PROXY', 'False') == 'True':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
+# --- Archive mode ---
+# Archive mode seals every write path and changes the interface into a read-only
+# record. The static exporter enables this automatically while rendering.
+ARCHIVE_MODE = os.getenv('ARCHIVE_MODE', 'False') == 'True'
+ARCHIVE_OPENED_DATE = os.getenv('ARCHIVE_OPENED_DATE', '')
+ARCHIVE_CLOSED_DATE = os.getenv('ARCHIVE_CLOSED_DATE', '')
+ARCHIVE_SITE_URL = os.getenv('ARCHIVE_SITE_URL', 'https://krine.ca')
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,6 +59,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'core.middleware.ArchiveReadOnlyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -72,6 +82,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.notifications',
                 'core.context_processors.analytics',
+                'core.context_processors.archive_state',
             ],
         },
     },

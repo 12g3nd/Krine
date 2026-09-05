@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    {% if GOOGLE_ANALYTICS_ID %}
+    {% if GOOGLE_ANALYTICS_ID and not ARCHIVE_MODE %}
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS_ID }}"></script>
     <script>
@@ -16,26 +16,31 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Krine</title>
+    <meta name="description" content="{% if ARCHIVE_MODE %}Krine, a closed read-only archive of an anonymous social experiment.{% else %}Krine, anonymous thoughts and connection.{% endif %}">
+    <title>{% if ARCHIVE_MODE %}Krine · Closed Network{% else %}Krine{% endif %}</title>
     <link rel="icon" type="image/png" href="{% static 'core/images/favicon.png' %}">
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'core/main.css' %}?v=14">
+    {% if ARCHIVE_MODE %}
+    <link rel="stylesheet" href="{% static 'core/archive.css' %}?v=1">
+    {% endif %}
 </head>
 
-<body>
+<body class="{% if ARCHIVE_MODE %}archive-mode{% endif %}">
     <nav class="navbar">
         <div class="container">
             <a href="{% url 'post_list' %}" class="logo">
                 <img src="{% static 'core/images/logo.png' %}" alt="Krine Logo">
             </a>
 
-            <!-- Mobile Actions Container -->
             <div class="mobile-actions">
+                {% if ARCHIVE_MODE %}
+                <a href="{% url 'archive' %}" class="archive-mobile-mark">SEALED</a>
+                {% else %}
                 <a href="{% url 'create_post' %}" class="btn btn-primary mobile-new-post">+ Post</a>
+                {% endif %}
                 <button class="menu-toggle" aria-label="Toggle menu">
                     <span></span>
                     <span></span>
@@ -57,31 +62,51 @@
                     </div>
                 </div>
 
+                {% if ARCHIVE_MODE %}
+                <a href="{% url 'archive' %}" class="archive-nav-link">
+                    <span class="archive-dot"></span>
+                    Closed Archive
+                </a>
+                {% else %}
                 <a href="{% url 'create_post' %}" class="btn btn-primary desktop-new-post">+ New Post</a>
+                {% endif %}
             </div>
         </div>
     </nav>
+
+    {% if ARCHIVE_MODE %}
+    <div class="archive-strip" role="status">
+        <div class="container archive-strip-inner">
+            <span>KRINE / CLOSED NETWORK</span>
+            <span class="archive-strip-divider">·</span>
+            <span>{{ ARCHIVE.post_count }} PUBLIC ENTRIES</span>
+            <span class="archive-strip-divider">·</span>
+            <span>{{ ARCHIVE.opened_date|date:"Y.m.d" }} → {{ ARCHIVE.closed_date|date:"Y.m.d" }}</span>
+            <span class="archive-strip-divider archive-strip-wide">·</span>
+            <span class="archive-strip-wide">{{ ARCHIVE.record_id }}</span>
+        </div>
+    </div>
+    {% endif %}
 
     <script>
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
 
-        if (menuToggle) {
+        if (menuToggle && navLinks) {
             menuToggle.addEventListener('click', () => {
                 menuToggle.classList.toggle('active');
                 navLinks.classList.toggle('active');
                 document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
             });
-        }
 
-        // Close menu/reset when clicking links
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                menuToggle.classList.remove('active');
-                navLinks.classList.remove('active');
-                document.body.style.overflow = '';
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
             });
-        });
+        }
     </script>
 
     <main class="container main-content">
@@ -90,7 +115,12 @@
 
     <footer>
         <h2 class="footer-logo">KRINE</h2>
+        {% if ARCHIVE_MODE %}
+        <p class="archive-footer-line">Closed network · {{ ARCHIVE.post_count }} public entries preserved · {{ ARCHIVE.record_id }}</p>
+        <p>Read-only archive of an anonymous experiment.</p>
+        {% else %}
         <p>&copy; 2026 Krine. Anonymous & Safe.</p>
+        {% endif %}
     </footer>
 </body>
 
