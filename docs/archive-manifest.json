@@ -17,14 +17,14 @@
   },
   "integrity": {
     "algorithm": "sha256",
-    "archive_fingerprint": "d6320e709995bfe7920b80b514e93134a0f824ef79f11671ac2f677ed27295ee",
+    "archive_fingerprint": "78a8590e6b923322194b74f5b8928873b2ce0daa6e932ef5b50b10d9101230f9",
     "file_count": 105,
     "files": {
       ".nojekyll": {"sha256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","bytes":0},
       "404.html": {"sha256":"0644cd1ffdd665bf2e5a4ad220b8a8e090ac8af61d8da86db40c3b4a4e72a84a","bytes":4435},
       "CNAME": {"sha256":"c2b12a0753cec495f0e7cbd4ff00a85453f6a8b517aad43a9c4b08875ffc7eaa","bytes":9},
       "about/index.html": {"sha256":"dc69e6f88a1f2d7aac3006bf7560c10a1165c5a4f3edba4bb21c5393e1b07b47","bytes":5111},
-      "archive/index.html": {"sha256":"c8325152e3d341d5f68afad0bdd4c57960074952f264af8dae599b9daf986e82","bytes":8725},
+      "archive/index.html": {"sha256":"3ffa34b78e2c601c62d18a9bac16e155d9cd0d0322497f3cb9c4130bdbabdac7","bytes":8725},
       "faq/index.html": {"sha256":"6d708c78dbb2f593d88747ae4326f94f6b3c1870afba477c96c8e0ecb0261441","bytes":5143},
       "index.html": {"sha256":"623b4e29e78662f32d3bc0a2ce117c832bda5d86e92a513b433af7d137a91e00","bytes":107975},
       "legal/index.html": {"sha256":"e00540829cf1eebaa1d946cd8aaa6f8747e0904a8af9597f09c0b2c5271a82b7","bytes":5976},
