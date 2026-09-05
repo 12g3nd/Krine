@@ -1,0 +1,445 @@
+{
+  "schema_version": 1,
+  "archive": "Krine / Closed Network",
+  "domain": "krine.ca",
+  "site_url": "https://krine.ca",
+  "generated_at": "2026-09-05T22:25:30.527560+00:00",
+  "record": {
+    "opened_date": "2026-01-26",
+    "closed_date": "2026-09-05",
+    "first_public_entry": "2026-01-26T01:12:36.718353+00:00",
+    "last_public_entry": "2026-06-03T08:59:27.173401+00:00",
+    "public_posts": 83,
+    "comments": 14,
+    "likes": 10683,
+    "selection_rule": "is_analyzed=True and is_flagged=False",
+    "missing_public_media": []
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "archive_fingerprint": "f6b70f0b9548cbcf3941dfa2222c2ded7f92141f88552a96f4b6268fbc9d2d6f",
+    "file_count": 105,
+    "files": {
+      ".nojekyll": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "404.html": {
+        "sha256": "0644cd1ffdd665bf2e5a4ad220b8a8e090ac8af61d8da86db40c3b4a4e72a84a",
+        "bytes": 4435
+      },
+      "CNAME": {
+        "sha256": "c2b12a0753cec495f0e7cbd4ff00a85453f6a8b517aad43a9c4b08875ffc7eaa",
+        "bytes": 9
+      },
+      "about/index.html": {
+        "sha256": "dc69e6f88a1f2d7aac3006bf7560c10a1165c5a4f3edba4bb21c5393e1b07b47",
+        "bytes": 5111
+      },
+      "archive/index.html": {
+        "sha256": "3c218d5bf7c1b422847b99e57a8ac39c3c83c5a26ac3bc17aa99be57e1d49281",
+        "bytes": 6713
+      },
+      "faq/index.html": {
+        "sha256": "6d708c78dbb2f593d88747ae4326f94f6b3c1870afba477c96c8e0ecb0261441",
+        "bytes": 5143
+      },
+      "index.html": {
+        "sha256": "623b4e29e78662f32d3bc0a2ce117c832bda5d86e92a513b433af7d137a91e00",
+        "bytes": 107975
+      },
+      "legal/index.html": {
+        "sha256": "e00540829cf1eebaa1d946cd8aaa6f8747e0904a8af9597f09c0b2c5271a82b7",
+        "bytes": 5976
+      },
+      "mission/index.html": {
+        "sha256": "f496ae46fc76eca2eb937b9fa95ba154ada6151097fbfca08c4e7b882987abcd",
+        "bytes": 4936
+      },
+      "post/08c2ff6b-7758-45f4-8a38-565fb218638b/index.html": {
+        "sha256": "70b977028bd0d5f9a59bb0caed2fc2015ac507ab3952034fd693bd774a218738",
+        "bytes": 6117
+      },
+      "post/09512726-1bdd-40e2-8fdb-de181dc6078d/index.html": {
+        "sha256": "f9481d6f8a5929940a90802609c11b7d42de41d7231e93829997e48acb01fa40",
+        "bytes": 6145
+      },
+      "post/0a607a2e-596b-49f6-9f8b-e5d6758a4dec/index.html": {
+        "sha256": "6e1b6fc3a1dbbb0e40ed6244435f52e4dd56baaaefdd061aac159f616acdb28f",
+        "bytes": 6287
+      },
+      "post/0d5cea5a-0fab-44a4-b571-7f966ca075bf/index.html": {
+        "sha256": "9b2b5e955bed305f9a836f9ef7eeb6d6b56831c4590d65f2f4ea5393d2681ac5",
+        "bytes": 6097
+      },
+      "post/132762c5-0a4c-46a9-bb57-24136d3771ed/index.html": {
+        "sha256": "6b75103ad5fb7053f294bb53c7cc4b4c4832d5cf2043b5a1c35235e84965455a",
+        "bytes": 6139
+      },
+      "post/13e12f98-3cfb-405d-87de-ccceecff811d/index.html": {
+        "sha256": "13fb29f9074c14fd889da396de5307b99fddec378f360f918812fa8291bd0922",
+        "bytes": 6104
+      },
+      "post/16ded0af-fbce-48b2-a481-b74a9093e300/index.html": {
+        "sha256": "7ae3dfd87ed557a939d0da119c37c480280b7ce43f44eab08c5f2f8d0be0e324",
+        "bytes": 6124
+      },
+      "post/175af408-4274-4448-9163-df8cda694460/index.html": {
+        "sha256": "e40fd2411d6e20079277e14da004ff324a929ab3f2e0cc4d4edd86b2fcfde2f1",
+        "bytes": 6091
+      },
+      "post/19d6d58d-990d-4191-94dc-8676983d6658/index.html": {
+        "sha256": "d39d1d330768c78a7f452519a0390eb14233aa131a80153ce29ba6dbc5791362",
+        "bytes": 6148
+      },
+      "post/1ce2846c-9612-4648-88d0-7cf820c0fa58/index.html": {
+        "sha256": "c7d317313be975a683efc3c7b5a217f70321a8d8b5dfeb3cecb429b14ac16458",
+        "bytes": 6102
+      },
+      "post/1e0072e0-9bb4-4fe7-abdc-7a357a881bd9/index.html": {
+        "sha256": "b7258c2ce0b7f6e84a3d8040fc1d27fcfbe8566cd63ad68155b0aea56a6d15d6",
+        "bytes": 6094
+      },
+      "post/1eb7ec15-f0e7-4d76-99c3-b4ddd8f24922/index.html": {
+        "sha256": "55b61e7158a77e72df0165dcdbafe9b14ff3610151bed0d0f4425ed995fef0b5",
+        "bytes": 6121
+      },
+      "post/20c7be04-aa58-4bd7-ba86-e6f6c25d0a55/index.html": {
+        "sha256": "2905627c979c046d2ded4f547b0b0b0fce753f28bc836863d127c8e15f0413b7",
+        "bytes": 6104
+      },
+      "post/229d0a23-99a4-43cf-ba78-73879cee9733/index.html": {
+        "sha256": "3edaeb30abcb1bd67b34dbf43c58509b1d85c85583c8b4e4d537eca5fd0f87e1",
+        "bytes": 6123
+      },
+      "post/236a82a7-de94-4847-b786-f7c20e1f3060/index.html": {
+        "sha256": "7c668636772334eca2e4ba9bdb7a83868e649cffd5cf408e7a143e103214181d",
+        "bytes": 6104
+      },
+      "post/24011968-e1db-45e8-a218-3841a508aa3e/index.html": {
+        "sha256": "ff94bc10fe552bb492ee7421c5eeca44803bc7fbdf44147383f99b916f945778",
+        "bytes": 6100
+      },
+      "post/2a0747ed-45bb-4870-a5c0-8afee482c397/index.html": {
+        "sha256": "fbe2595d8c438cc76929fc09268423aa4fc30456674f76a23c0d312b23220011",
+        "bytes": 6102
+      },
+      "post/2b4b63d0-0378-4937-91e1-b593fda7ea5d/index.html": {
+        "sha256": "d968bac6bdb3d0232a758ff711753ba6df932c8a60c45baab543491736fad2f5",
+        "bytes": 6275
+      },
+      "post/2e26ecb5-909f-45e4-b8b0-218447badcee/index.html": {
+        "sha256": "bfbaa1a121495db6510211160985cef2b85daf4b8097c7e94e70040552be4f5a",
+        "bytes": 6159
+      },
+      "post/34f8a673-97c7-4569-8597-96b426b9d97e/index.html": {
+        "sha256": "e1479cd77b7d6b973c29c1ba657fc25780c527c36f34d8738ee86e6e2d1ff700",
+        "bytes": 6132
+      },
+      "post/370552bf-acd4-4dc0-9ee0-8baf3d694070/index.html": {
+        "sha256": "997eb8505c50ec5a0181271086dd4ba5ec014f2fdae470dac2daa18fcff76ed6",
+        "bytes": 6298
+      },
+      "post/3a24d2c8-2ef5-4e80-822b-d640ad528dbb/index.html": {
+        "sha256": "ddc5332ef4e3bf2533f239d2b77b378fa1124f43c05b453fa09604d19d19c62e",
+        "bytes": 6107
+      },
+      "post/3bdfb047-743c-4642-8864-0f9d790d772f/index.html": {
+        "sha256": "98838c3f4770545a174a11a7d04696969c482e74c4a5ad8c88b7461930904bcb",
+        "bytes": 6132
+      },
+      "post/3ee6efbb-f615-4f6d-af30-3c3b591d4d36/index.html": {
+        "sha256": "ca566e9403ebe192d5cda679bb2117ad11a5edfc819ca7ee34aee398cb8ec046",
+        "bytes": 6113
+      },
+      "post/3f60cb3a-4928-4a29-9316-9a09a4843174/index.html": {
+        "sha256": "4309175d835ba30018ac9edd4cb8ce7a692a5c77c9501d93367f9a43b59cbdfb",
+        "bytes": 6162
+      },
+      "post/41a50cbf-bcfd-467f-a458-d53713e2d660/index.html": {
+        "sha256": "1ad02d7d00a4324c35f11b97173d8b6994fa52297f47cedde0bc45c763349bda",
+        "bytes": 6150
+      },
+      "post/43101573-cb86-455c-a032-16bbec5c2623/index.html": {
+        "sha256": "3c91a7926e99d785c333624d80aa0980bd42e4a3ce0309f9b714522d6b6ea825",
+        "bytes": 6143
+      },
+      "post/43b4f3fa-ad04-439b-aaeb-b5430f20f53e/index.html": {
+        "sha256": "2d999dc1d058f97b5bbfccbfa40a794593d2b7657643d56b46714517369f9657",
+        "bytes": 6180
+      },
+      "post/45df21d1-b8b2-4cfc-af3b-d381d6cca5bb/index.html": {
+        "sha256": "a267deed940a5f2253591bfa44056e661be55e92bc83e26ea46650aed1ab6bb4",
+        "bytes": 6135
+      },
+      "post/47bf1e38-bd08-49c7-8323-711472766cdd/index.html": {
+        "sha256": "b9a417b33633b4e02170fd911d8c67cd5c31ca24024e4b3f4524fab8f0788c00",
+        "bytes": 6115
+      },
+      "post/4b9f864c-f708-4e1e-ae60-65faad431c31/index.html": {
+        "sha256": "d7261559cc8f74a5e1a77c73407b270311e5a06b72059c2f88d2ffa512dd88ce",
+        "bytes": 6164
+      },
+      "post/4e71f7e8-2588-4c7e-8b68-4e5c30cc0c52/index.html": {
+        "sha256": "f45dfa17e6694065f370a72ad23dffa957e5e73e2d7c0e974aa1499a01fa53b4",
+        "bytes": 6148
+      },
+      "post/5004ab1d-f52a-4a74-884a-9bb07f241728/index.html": {
+        "sha256": "b62e3fc3b73ab836451ab0bd2ab512514e44a410a5317329af4b7f650cb0fe8e",
+        "bytes": 6145
+      },
+      "post/51699a55-2a66-4bab-a342-9a1f8c4e61ba/index.html": {
+        "sha256": "a3a2fe2925a6a3d0f39189827228fde7aee0091591f2ab251b52062fd939abf1",
+        "bytes": 6155
+      },
+      "post/52754344-156c-4c01-900a-d065d0871684/index.html": {
+        "sha256": "98fb9b44e87c999475d97a69c4121086f3893c47cf9b5d1bd2b18c0a5afd9491",
+        "bytes": 6155
+      },
+      "post/53e67421-4fd6-4123-b053-e3159cced586/index.html": {
+        "sha256": "c80b24c0bb466b5b3061a907807f64ca444c191d32f22dc321d522e6301995b6",
+        "bytes": 6140
+      },
+      "post/55d81b2e-65f2-47b9-b2f7-159cff12382a/index.html": {
+        "sha256": "18930c6eb2bf88f9b93ca2de9a557ff430a757553c34f6379b65921cef51b60d",
+        "bytes": 6133
+      },
+      "post/5e2d45bc-cdc6-4bfd-b282-f6a3cff44825/index.html": {
+        "sha256": "530d6c1d85a108055588b42d97091577f59ba0736c5c82bdcd2e54025127f604",
+        "bytes": 6098
+      },
+      "post/613c34b8-cede-41d4-ab58-e3f5cb17476d/index.html": {
+        "sha256": "ee7a6b47acc6b06a728c05ef44a69d23f6ec5c90225a9629b3d05b3822fc0558",
+        "bytes": 6112
+      },
+      "post/6526686d-8f1f-4dc7-91a9-8a4b445863f9/index.html": {
+        "sha256": "21bb22f095a6ca9be571035c127661355fe506e4a7f527423c71bfe37aba8891",
+        "bytes": 6107
+      },
+      "post/6d83a8e4-5f05-485a-98f8-ad9ec4245e61/index.html": {
+        "sha256": "96bc382569e5916b8bd54f5ebfc3125a07ece1e66e835c95b944bb305acb61fd",
+        "bytes": 6205
+      },
+      "post/70d4998e-5428-4194-a2fd-f4049c2a48ba/index.html": {
+        "sha256": "f086d7a2c1d15dd7507d5c2cf75ae6889cf95c21107bbca7f8075316f87099ba",
+        "bytes": 6142
+      },
+      "post/7384577e-8f12-4d4d-b414-860cb18c070d/index.html": {
+        "sha256": "4494c78647bf3c68bfccb178e8771161bfb892be57d7f3c625338f4fdb26aecb",
+        "bytes": 6126
+      },
+      "post/7553f050-7026-4061-b28c-46cc2518163a/index.html": {
+        "sha256": "624ac09c2a417b04f56eedbb8669f20df482db4151ef50e75beae27d636b3628",
+        "bytes": 6155
+      },
+      "post/7787e091-428d-4965-a45d-72ff031c32ff/index.html": {
+        "sha256": "66ad6658f248a8776a704f17fec29dc5da505ef47b8488304555b7f57a3a6925",
+        "bytes": 6100
+      },
+      "post/84bf7f47-98a6-4135-9e99-7c59b136edf8/index.html": {
+        "sha256": "d8f86addd01ce1f2eec5c6bd77a4d422f36ae5f6de0cac1281aba045d212c120",
+        "bytes": 6166
+      },
+      "post/850eb939-1372-4f25-8f6c-9e89acdae46c/index.html": {
+        "sha256": "708b9ab9451eb98876e8eacb9188fea4386ea0704d631cb5981530de5c86aa7b",
+        "bytes": 6116
+      },
+      "post/86e9c82e-6eb7-482a-a0bf-1be2d0b6b628/index.html": {
+        "sha256": "5ececf77aaa4351f4547d39e5758987b815f1bfca32f48fa2df636a8c6d45d27",
+        "bytes": 6150
+      },
+      "post/89764e82-180c-40bc-8b75-fcdb2f92e4d8/index.html": {
+        "sha256": "e1ace46a3aad61b3d94b3d0bb879b11631e2d6f82a6f51c20a1e0d9316787b7a",
+        "bytes": 6329
+      },
+      "post/8a2d5125-9270-4f13-baf9-86fe8d99ac7a/index.html": {
+        "sha256": "5cc74187fb69a0a319ad779ff9d0b12a266779ab34649966b502bb0d5bd421b0",
+        "bytes": 6098
+      },
+      "post/8bfc69c0-7b8a-42a4-ae45-8c2188df9530/index.html": {
+        "sha256": "24806b712a1954b7b458f145937c802220e534f41793cd964375e9dc930ac2b2",
+        "bytes": 6129
+      },
+      "post/90cd4325-e521-49ec-a1f3-8adf11fd4060/index.html": {
+        "sha256": "0d2985de7c63938633e8d0a5a1ac5fb62fa6ba4cb950d21d995a168a0c9deb5e",
+        "bytes": 8329
+      },
+      "post/96e3b8f4-274c-472b-9d0a-265b7b1041c0/index.html": {
+        "sha256": "f1dda9cd2fe1fcd7af6c511035e5c3971a3d18748b257d5f94e0b64348ba3cad",
+        "bytes": 6161
+      },
+      "post/9977209a-8084-4ae6-837b-8d4462af7320/index.html": {
+        "sha256": "36baa3f9ee20ca09df0f350a2a77b32b90f7563c42dbf3c86fcd64e1378e479b",
+        "bytes": 6146
+      },
+      "post/9b657707-93f8-4d30-ab02-74d9dd54a4f6/index.html": {
+        "sha256": "576f9dce6ba10c5514bd64130be003cf821cf5b7e467b4dc14b1392c9c4b917f",
+        "bytes": 6099
+      },
+      "post/a34d1ee9-bdbd-4941-9295-c0ffdd88649b/index.html": {
+        "sha256": "705e1a478b28221ed1a1f1a85dff6eb0ffbb72a187e1f274ede75b552b5194d6",
+        "bytes": 6132
+      },
+      "post/a3a89c88-6753-444a-a186-8174cc32840c/index.html": {
+        "sha256": "fef7ef8df8ae01d72a737fe062a3797895e63280ec1d6200d7719a16c639c355",
+        "bytes": 6168
+      },
+      "post/a49cd40c-46ae-46a9-b387-f40abcd38b61/index.html": {
+        "sha256": "9948e8256b4b9f07328a6de42b882660b673b5229121a881a7598d719e1fd3af",
+        "bytes": 6133
+      },
+      "post/a77bb6fd-3d5d-477b-bf2e-0b8d4212eef7/index.html": {
+        "sha256": "b83c7befd38f8124f6e762f7a61a44d88d1a3d8a6e2bb746be59bbfa08165ed2",
+        "bytes": 6151
+      },
+      "post/ac25dc98-412c-49cf-aa17-28291d7613ad/index.html": {
+        "sha256": "6cdb70d10069cd3c9d66a5a75ad9e9315e3e42379ca9a4f386b2193e8a3b3b1a",
+        "bytes": 6124
+      },
+      "post/b3a5d27e-6c29-4665-9a82-eabde724451b/index.html": {
+        "sha256": "d32c29f61ee1d303bb951b63c48ab4917048fbfc95eddb47b79c40ef6accdbb8",
+        "bytes": 6153
+      },
+      "post/bb08e6ff-ea72-4c4a-85e0-1aed716af824/index.html": {
+        "sha256": "57649ccfb465cf5dc363a7e76a9c58d851573d58273f9918ea6eb83d6f3abe6c",
+        "bytes": 6127
+      },
+      "post/bdff00a8-95c3-43f7-b43b-dacbd8c0738a/index.html": {
+        "sha256": "9d12c765b030482fd48ec774a8a700a7407bdf39f9734617169713de52bee154",
+        "bytes": 6126
+      },
+      "post/c21d98f5-b3a8-4c50-95cf-ab2e49f03e6c/index.html": {
+        "sha256": "5c3017433dca41f5fd27d2da1e1f082b354c05d4dc1fe9f2b8cc40d2d12729d3",
+        "bytes": 6166
+      },
+      "post/c3a96965-d22f-4d69-8902-8f2ac7d0dbfd/index.html": {
+        "sha256": "13b325f1ebce13ce3f32e7e5233aaf187780ceb5e6c5e19a363b283957db07bb",
+        "bytes": 6148
+      },
+      "post/ce63f306-8bc1-4d56-8b47-1a934450d0a1/index.html": {
+        "sha256": "083224b677d3779683a16ed705fe37a8afbb6ac8d250426d73d90345f20ff82f",
+        "bytes": 6113
+      },
+      "post/d2a8e143-b4ff-4c09-afcf-eeda6f692229/index.html": {
+        "sha256": "3edb0d628a399e78cf4d5b39ecb2230f8370415c7f6cb76c6fe174a053f20cde",
+        "bytes": 6110
+      },
+      "post/d39118f4-ba14-4605-bffa-ca09ba4ad5d8/index.html": {
+        "sha256": "e35aa2f5ba51dc1a2b317e47f8dcba1343fa48446849ba47a0e24ba9f83f9562",
+        "bytes": 6093
+      },
+      "post/d6225d97-e328-45b2-87c4-b2836fd64fca/index.html": {
+        "sha256": "55b0dfff56d66d8e9f9a3139cfb049abbe4fde80491fdc9e82c3f35824c829ed",
+        "bytes": 6556
+      },
+      "post/d845d6d9-b515-42e9-b751-491330f8bc8d/index.html": {
+        "sha256": "0dddb867dc3c312049676bd3316f275aa7f40c08f0d5964a966746535177dc33",
+        "bytes": 6144
+      },
+      "post/d87f9621-99e1-4c9c-9970-af73f2750ebc/index.html": {
+        "sha256": "28b8ebf539dbf5e48307791e53b7248a4ec304a36dc2877205e0a092362ed05d",
+        "bytes": 6199
+      },
+      "post/db23e95b-8e5c-4009-90ae-2369407094e3/index.html": {
+        "sha256": "78aa7f464dbf8786eaed09bce48874b0b272e4f5fd903c24440fdb900ec54eab",
+        "bytes": 6106
+      },
+      "post/dbd7e90e-0e9a-4b79-8030-738f21ec3269/index.html": {
+        "sha256": "f2dec38ee6557bbfe5e38c8d033739b6f4fbe0ac4eb50186fae8a12c0c9585b7",
+        "bytes": 6142
+      },
+      "post/e11e5d04-dca3-4cdd-8dc7-c3b2e74a9f71/index.html": {
+        "sha256": "e0dad28bded0a66c591ca6d77b58db114636ecf51ce2636e243fb6ead0754997",
+        "bytes": 6084
+      },
+      "post/e5797cd6-c3a3-4a17-848c-2136b1aa598e/index.html": {
+        "sha256": "28c92fb19353d41971003a07e0c5ce0158e0701ebbd461f8d9673bc68a90c50a",
+        "bytes": 6147
+      },
+      "post/ea137042-59af-4a02-82b9-7fb5b60ba81b/index.html": {
+        "sha256": "5a4b86a46e69e99118f66c9465fa08403059a7e09f01972fcad58f2b9891de56",
+        "bytes": 6165
+      },
+      "post/eaa4ad9a-dfea-41bc-91de-7dbbebd72a75/index.html": {
+        "sha256": "b44ad258fe35ef621fc6892b9fec9fdfc532475a2d20150368e5e77137a3feba",
+        "bytes": 6125
+      },
+      "post/eb1f3d5c-c628-465f-b000-81165069739b/index.html": {
+        "sha256": "1bd6be5dbb6b299847f916566fb8ff734edffc221343af6f4170d3b1c6cf3841",
+        "bytes": 6158
+      },
+      "post/f4043595-fa68-4711-9422-aa085f26fbf3/index.html": {
+        "sha256": "7e1d9599bbef73d1a50cbbd581ddc2923077880f0437ed588ede8599aaf47f9d",
+        "bytes": 6102
+      },
+      "post/f4e90f5b-8689-42c6-a74e-a7074c0e4ce2/index.html": {
+        "sha256": "3e08641dd5940034baece0560a7fffa716de77596811bafffae9cbce618d1d46",
+        "bytes": 6217
+      },
+      "post/f751abf0-caf7-441a-8161-1f95587f78fd/index.html": {
+        "sha256": "e8b68ba852e3d27b328edec265308a1d076746b08a497c5f7efd4c0d6b43370d",
+        "bytes": 6143
+      },
+      "post/fba2d4d3-dabb-4405-b341-23b5535f46cf/index.html": {
+        "sha256": "0af2ec46228d99f047918289acbae5e0279b4ec920e9fc5bfce0cf9a6c47ad6d",
+        "bytes": 6123
+      },
+      "post/fd571768-55e0-4c6d-9b6e-d3244945fcfd/index.html": {
+        "sha256": "d4dda3e602c51de18ba05adb3fbb252d9bd294ff1ab019db2c2cd330b3e94465",
+        "bytes": 6100
+      },
+      "robots.txt": {
+        "sha256": "bebbba7ede7ef1af82c51f782bf5febf2e57298b27c75b43751b744b16ffeed9",
+        "bytes": 61
+      },
+      "safety/index.html": {
+        "sha256": "fa1cba2fb479cbe4c0997191da413a78f9b80965780d1035493171a8e5f69ad0",
+        "bytes": 5195
+      },
+      "security/index.html": {
+        "sha256": "745c8d83a0b92a1fa20ab2c1f912e6a66c3d58d490c295be3118c4597d0aaf14",
+        "bytes": 5261
+      },
+      "sitemap.xml": {
+        "sha256": "4fb73ab8da4133348c4e04527f8af2b420ef363f5198829ddf43cb328c6622db",
+        "bytes": 7466
+      },
+      "static/core/archive.css": {
+        "sha256": "a0fbcdf7270ac0b7cc7c5e4fddadd39ed7e8b4b6226e043b7bc649d7fc3b0de1",
+        "bytes": 7259
+      },
+      "static/core/images/comment.png": {
+        "sha256": "a7be1af5b8d5f11fbfe086b5f7de27ed207fef5c29efcb9e6f3c1926bd01609e",
+        "bytes": 3404
+      },
+      "static/core/images/emptyheart.png": {
+        "sha256": "45686e0813163abb200225b3d6278bc0ddcbf15d924689459d6fdf6b42b02d25",
+        "bytes": 3145
+      },
+      "static/core/images/favicon.png": {
+        "sha256": "5cf4c7a1e31ac1be4142674dea1768517f0206c53b887aeca194f12fed673b6a",
+        "bytes": 122756
+      },
+      "static/core/images/fullheart.png": {
+        "sha256": "a4b3085600276cb0386de15d7a67cd50f601ebe8240d4f2d1f3465197a07a3b0",
+        "bytes": 2473
+      },
+      "static/core/images/logo.png": {
+        "sha256": "d9fddd32ef41c058b866e2fa5bbe091e3626da064970a5789819ab4f638be96e",
+        "bytes": 91270
+      },
+      "static/core/images/report.png": {
+        "sha256": "51a111913de8a75e27acd7626c51dfe9d0793e564fa245a8a85857b8afb3f66c",
+        "bytes": 24190
+      },
+      "static/core/main.css": {
+        "sha256": "0d521c3d77f5be60b932f982fa5a96e2058fb4bef44bebe142aa5940f4f55843",
+        "bytes": 18313
+      },
+      "static/core/style.css": {
+        "sha256": "53dc17b28e3281628c170b04518ce6e9ebb1235025b2e1823966d1e8270d462d",
+        "bytes": 5508
+      }
+    }
+  }
+}

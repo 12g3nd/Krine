@@ -1,0 +1,1481 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Krine, a closed read-only archive of an anonymous social experiment.">
+    <title>Krine · Closed Network</title>
+    <link rel="icon" type="image/png" href="/static/core/images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/core/main.css?v=14">
+    
+    <link rel="stylesheet" href="/static/core/archive.css?v=1">
+    
+</head>
+
+<body class="archive-mode">
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">
+                <img src="/static/core/images/logo.png" alt="Krine Logo">
+            </a>
+
+            <div class="mobile-actions">
+                
+                <a href="/archive/" class="archive-mobile-mark">SEALED</a>
+                
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <div class="nav-links">
+                <a href="/about/" class="nav-item">About</a>
+                <a href="/mission/" class="nav-item">Mission</a>
+                <a href="/faq/" class="nav-item">FAQ</a>
+
+                <div class="dropdown">
+                    <span class="nav-item">Legal & Compliance ▾</span>
+                    <div class="dropdown-content">
+                        <a href="/legal/">Terms & Privacy</a>
+                        <a href="/security/">Security</a>
+                        <a href="/safety/">Safety</a>
+                    </div>
+                </div>
+
+                
+                <a href="/archive/" class="archive-nav-link">
+                    <span class="archive-dot"></span>
+                    Closed Archive
+                </a>
+                
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="archive-strip" role="status">
+        <div class="container archive-strip-inner">
+            <span>KRINE / CLOSED NETWORK</span>
+            <span class="archive-strip-divider">·</span>
+            <span>83 PUBLIC ENTRIES</span>
+            <span class="archive-strip-divider">·</span>
+            <span>2026.01.26 → 2026.09.05</span>
+            <span class="archive-strip-divider archive-strip-wide">·</span>
+            <span class="archive-strip-wide">KRN-20260126-20260905-0083</span>
+        </div>
+    </div>
+    
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+    </script>
+
+    <main class="container main-content">
+        
+<section class="archive-hero">
+    <div class="archive-kicker">PRESERVED PUBLIC RECORD / KRN-20260126-20260905-0083</div>
+    <h1>Honest thoughts, <span class="highlight"><em>after the room went quiet.</em></span></h1>
+    <p>Krine is closed. What remains here is the final public record of the network, preserved without accounts, posting, likes, reports, or new comments.</p>
+
+    <div class="archive-ledger" aria-label="Krine archive summary">
+        <div class="archive-ledger-item"><span class="archive-ledger-label">STATUS</span><strong>CLOSED / READ ONLY</strong></div>
+        <div class="archive-ledger-item"><span class="archive-ledger-label">PUBLIC ENTRIES</span><strong>83</strong></div>
+        <div class="archive-ledger-item"><span class="archive-ledger-label">COMMENTS</span><strong>14</strong></div>
+        <div class="archive-ledger-item"><span class="archive-ledger-label">LIKES RECORDED</span><strong>10683</strong></div>
+        <div class="archive-ledger-item"><span class="archive-ledger-label">RECORDED ACTIVITY</span><strong>Jan 26, 2026 → Sep 05, 2026</strong></div>
+    </div>
+
+    <form class="search-form archive-search-form" id="archiveSearchForm" role="search">
+        <input id="archiveSearch" type="search" placeholder="Search the preserved network..." autocomplete="off">
+    </form>
+</section>
+
+<div class="archive-controls">
+    <div class="sort-options" aria-label="Sort archive">
+        <span class="archive-control-label">Sort by:</span>
+        <a href="?sort=newest" class="sort-btn active" data-archive-sort="newest">Newest</a>
+        <a href="?sort=popular" class="sort-btn" data-archive-sort="popular">Popular</a>
+        <a href="?sort=most_commented" class="sort-btn" data-archive-sort="most_commented">Most Commented</a>
+    </div>
+    <div class="archive-result-count" id="archiveResultCount">83 preserved entries</div>
+</div>
+
+<div class="content-wrapper">
+    <aside class="filter-section archive-filter-section">
+        <div class="filter-header">
+            <div class="filter-title">Filter by Type</div>
+            <button type="button" class="filter-toggle-btn" onclick="document.querySelector('.filter-chips-container').classList.toggle('active')"><span>Filter</span> ▾</button>
+        </div>
+        <div class="filter-chips-container" id="archiveTypeFilters">
+            <label class="filter-chip"><input type="checkbox" value="letter"><span>Letter</span></label>
+            <label class="filter-chip"><input type="checkbox" value="poem"><span>Poem</span></label>
+            <label class="filter-chip"><input type="checkbox" value="thought"><span>Thought</span></label>
+            <label class="filter-chip"><input type="checkbox" value="confession"><span>Confession</span></label>
+            <label class="filter-chip"><input type="checkbox" value="apology"><span>Apology</span></label>
+            <label class="filter-chip"><input type="checkbox" value="unsent"><span>Unsent</span></label>
+            <label class="filter-chip"><input type="checkbox" value="note"><span>Note</span></label>
+        </div>
+        <div class="archive-filter-note">These controls run entirely in your browser. The archive has no application server behind it.</div>
+    </aside>
+
+    <div class="archive-feed-column">
+        <div class="post-grid" id="archivePostGrid">
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1780477167" data-likes="105" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>im krine :skull:</p></div>
+                <div class="post-tags"><span class="tag">#Found</span><span class="tag">#Broken</span><span class="tag">#Bittersweet</span></div>
+                <div class="post-footer">
+                    <span class="date">Jun 03, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>105</span></span>
+                    </div>
+                </div>
+                <a href="/post/f4043595-fa68-4711-9422-aa085f26fbf3/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="confession" data-created="1774342875" data-likes="206" data-comments="1">
+                <span class="post-type-tag">Confession</span>
+                
+                <div class="post-content"><p>I said I was fine so many times i almost convinced my self</p></div>
+                <div class="post-tags"><span class="tag">#Peaceful</span><span class="tag">#Bittersweet</span><span class="tag">#Confession</span></div>
+                <div class="post-footer">
+                    <span class="date">Mar 24, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>1</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>206</span></span>
+                    </div>
+                </div>
+                <a href="/post/89764e82-180c-40bc-8b75-fcdb2f92e4d8/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="poem" data-created="1773997584" data-likes="194" data-comments="0">
+                <span class="post-type-tag">Poem</span>
+                
+                <div class="post-content"><p>it&#x27;s march now 
+the snow is almost gone 
+I think I am too / (getting there)</p></div>
+                <div class="post-tags"><span class="tag">#Growing</span><span class="tag">#Bittersweet</span><span class="tag">#Hopeful</span></div>
+                <div class="post-footer">
+                    <span class="date">Mar 20, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>194</span></span>
+                    </div>
+                </div>
+                <a href="/post/c21d98f5-b3a8-4c50-95cf-ab2e49f03e6c/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1773910846" data-likes="199" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>I pretend I didn&#x27;t see the message when I just don&#x27;t know what to say</p></div>
+                <div class="post-tags"><span class="tag">#Numb</span><span class="tag">#Bittersweet</span><span class="tag">#Sad</span></div>
+                <div class="post-footer">
+                    <span class="date">Mar 19, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>199</span></span>
+                    </div>
+                </div>
+                <a href="/post/51699a55-2a66-4bab-a342-9a1f8c4e61ba/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1773772809" data-likes="188" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>sj whats wrong wit u</p></div>
+                <div class="post-tags"><span class="tag">#Broken</span><span class="tag">#Sad</span><span class="tag">#Bittersweet</span></div>
+                <div class="post-footer">
+                    <span class="date">Mar 17, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>188</span></span>
+                    </div>
+                </div>
+                <a href="/post/8a2d5125-9270-4f13-baf9-86fe8d99ac7a/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="note" data-created="1773565742" data-likes="191" data-comments="0">
+                <span class="post-type-tag">Note</span>
+                
+                <div class="post-content"><p>things that are okay: leaving early, saying no, taking the long way home</p></div>
+                <div class="post-tags"><span class="tag">#Peaceful</span><span class="tag">#Wholesome</span><span class="tag">#Bittersweet</span></div>
+                <div class="post-footer">
+                    <span class="date">Mar 15, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>191</span></span>
+                    </div>
+                </div>
+                <a href="/post/52754344-156c-4c01-900a-d065d0871684/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="poem" data-created="1773565583" data-likes="193" data-comments="0">
+                <span class="post-type-tag">Poem</span>
+                
+                <div class="post-content"><p>it&#x27;s march now 
+the snow is almost gone 
+I think I am too / (getting there)</p></div>
+                <div class="post-tags"><span class="tag">#Growing</span><span class="tag">#Bittersweet</span><span class="tag">#Hopeful</span></div>
+                <div class="post-footer">
+                    <span class="date">Mar 15, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>193</span></span>
+                    </div>
+                </div>
+                <a href="/post/84bf7f47-98a6-4135-9e99-7c59b136edf8/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="apology" data-created="1773220030" data-likes="188" data-comments="0">
+                <span class="post-type-tag">Apology</span>
+                
+                <div class="post-content"><p>I&#x27;m sorry I went quiet when you needed me to show up</p></div>
+                <div class="post-tags"><span class="tag">#Regret</span><span class="tag">#Confession</span><span class="tag">#Bittersweet</span></div>
+                <div class="post-footer">
+                    <span class="date">Mar 11, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>188</span></span>
+                    </div>
+                </div>
+                <a href="/post/70d4998e-5428-4194-a2fd-f4049c2a48ba/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="confession" data-created="1773219657" data-likes="189" data-comments="0">
+                <span class="post-type-tag">Confession</span>
+                
+                <div class="post-content"><p>I&#x27;ve rewritten this text 7 times and still haven&#x27;t sent it</p></div>
+                <div class="post-tags"><span class="tag">#Tired</span><span class="tag">#Bittersweet</span><span class="tag">#Regret</span></div>
+                <div class="post-footer">
+                    <span class="date">Mar 11, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>189</span></span>
+                    </div>
+                </div>
+                <a href="/post/a77bb6fd-3d5d-477b-bf2e-0b8d4212eef7/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1773168022" data-likes="177" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>peep game</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Found</span><span class="tag">#Peaceful</span></div>
+                <div class="post-footer">
+                    <span class="date">Mar 10, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>177</span></span>
+                    </div>
+                </div>
+                <a href="/post/175af408-4274-4448-9163-df8cda694460/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="unsent" data-created="1772960563" data-likes="162" data-comments="0">
+                <span class="post-type-tag">Unsent</span>
+                
+                <div class="post-content"><p>I wanted to tell you I was proud of you and I never did. I should have.</p></div>
+                <div class="post-tags"><span class="tag">#Regret</span><span class="tag">#Bittersweet</span><span class="tag">#Sad</span></div>
+                <div class="post-footer">
+                    <span class="date">Mar 08, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>162</span></span>
+                    </div>
+                </div>
+                <a href="/post/19d6d58d-990d-4191-94dc-8676983d6658/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="unsent" data-created="1772960544" data-likes="155" data-comments="0">
+                <span class="post-type-tag">Unsent</span>
+                
+                <div class="post-content"><p>I hope wherever you are, you&#x27;re not as hard on yourself as you used to be</p></div>
+                <div class="post-tags"><span class="tag">#Hopeful</span><span class="tag">#Bittersweet</span><span class="tag">#Regret</span></div>
+                <div class="post-footer">
+                    <span class="date">Mar 08, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>155</span></span>
+                    </div>
+                </div>
+                <a href="/post/2e26ecb5-909f-45e4-b8b0-218447badcee/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="unsent" data-created="1772787786" data-likes="152" data-comments="0">
+                <span class="post-type-tag">Unsent</span>
+                
+                <div class="post-content"><p>you were the first person who made me feel like I wasn&#x27;t too much</p></div>
+                <div class="post-tags"><span class="tag">#Gratitude</span><span class="tag">#Peaceful</span><span class="tag">#Bittersweet</span></div>
+                <div class="post-footer">
+                    <span class="date">Mar 06, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>152</span></span>
+                    </div>
+                </div>
+                <a href="/post/7553f050-7026-4061-b28c-46cc2518163a/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="poem" data-created="1772701543" data-likes="143" data-comments="0">
+                <span class="post-type-tag">Poem</span>
+                
+                <div class="post-content"><p>I keep my phone face down 
+not because I don&#x27;t want to hear from you 
+but because I do</p></div>
+                <div class="post-tags"><span class="tag">#Confession</span><span class="tag">#Peaceful</span><span class="tag">#Reflective</span></div>
+                <div class="post-footer">
+                    <span class="date">Mar 05, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>143</span></span>
+                    </div>
+                </div>
+                <a href="/post/43b4f3fa-ad04-439b-aaeb-b5430f20f53e/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="note" data-created="1772528929" data-likes="132" data-comments="0">
+                <span class="post-type-tag">Note</span>
+                
+                <div class="post-content"><p>you don&#x27;t have to be productive every day. some days existing is the whole job.</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Found</span><span class="tag">#Wholesome</span></div>
+                <div class="post-footer">
+                    <span class="date">Mar 03, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>132</span></span>
+                    </div>
+                </div>
+                <a href="/post/4b9f864c-f708-4e1e-ae60-65faad431c31/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="letter" data-created="1772528646" data-likes="138" data-comments="0">
+                <span class="post-type-tag">Letter</span>
+                
+                <div class="post-content"><p>dear whoever needs to hear this: you don&#x27;t have to earn rest</p></div>
+                <div class="post-tags"><span class="tag">#Peaceful</span><span class="tag">#Bittersweet</span><span class="tag">#Wholesome</span></div>
+                <div class="post-footer">
+                    <span class="date">Mar 03, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>138</span></span>
+                    </div>
+                </div>
+                <a href="/post/86e9c82e-6eb7-482a-a0bf-1be2d0b6b628/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="letter" data-created="1772355857" data-likes="126" data-comments="0">
+                <span class="post-type-tag">Letter</span>
+                
+                <div class="post-content"><p>dear past me: that thing you&#x27;re terrified of right now? you survive it.</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Reflective</span><span class="tag">#Anxious</span></div>
+                <div class="post-footer">
+                    <span class="date">Mar 01, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>126</span></span>
+                    </div>
+                </div>
+                <a href="/post/96e3b8f4-274c-472b-9d0a-265b7b1041c0/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="poem" data-created="1772269566" data-likes="114" data-comments="0">
+                <span class="post-type-tag">Poem</span>
+                
+                <div class="post-content"><p>some people walk into your life 
+and rearrange the furniture 
+and leave 
+and you keep tripping over where things used to be</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Broken</span><span class="tag">#Reflective</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 28, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>114</span></span>
+                    </div>
+                </div>
+                <a href="/post/f4e90f5b-8689-42c6-a74e-a7074c0e4ce2/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="confession" data-created="1772242854" data-likes="123" data-comments="0">
+                <span class="post-type-tag">Confession</span>
+                
+                <div class="post-content"><p>february 67th i got breakfast on my mindddd</p></div>
+                <div class="post-tags"><span class="tag">#Dreamy</span><span class="tag">#Bittersweet</span><span class="tag">#Wholesome</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 28, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>123</span></span>
+                    </div>
+                </div>
+                <a href="/post/55d81b2e-65f2-47b9-b2f7-159cff12382a/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="apology" data-created="1772183241" data-likes="106" data-comments="0">
+                <span class="post-type-tag">Apology</span>
+                
+                <div class="post-content"><p>I&#x27;m sorry for the version of me you had to deal with last year</p></div>
+                <div class="post-tags"><span class="tag">#Regret</span><span class="tag">#Bittersweet</span><span class="tag">#Sad</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 27, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>106</span></span>
+                    </div>
+                </div>
+                <a href="/post/c3a96965-d22f-4d69-8902-8f2ac7d0dbfd/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="note" data-created="1772131162" data-likes="88" data-comments="0">
+                <span class="post-type-tag">Note</span>
+                
+                <div class="post-content"><p>i cont lie whats ts</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Confession</span><span class="tag">#Tired</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>88</span></span>
+                    </div>
+                </div>
+                <a href="/post/2a0747ed-45bb-4870-a5c0-8afee482c397/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1772044877" data-likes="78" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>kawaii ai ai ai</p></div>
+                <div class="post-tags"><span class="tag">#Dreamy</span><span class="tag">#Peaceful</span><span class="tag">#Bittersweet</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 25, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>78</span></span>
+                    </div>
+                </div>
+                <a href="/post/24011968-e1db-45e8-a218-3841a508aa3e/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1771923458" data-likes="73" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>why does it feel like everyone has their life together except me</p></div>
+                <div class="post-tags"><span class="tag">#Lonely</span><span class="tag">#Sad</span><span class="tag">#Venting</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 24, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>73</span></span>
+                    </div>
+                </div>
+                <a href="/post/53e67421-4fd6-4123-b053-e3159cced586/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1771837122" data-likes="73" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>romanticizing my life is the only thing keeping me going rn</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Love</span><span class="tag">#Nostalgic</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 23, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>73</span></span>
+                    </div>
+                </div>
+                <a href="/post/f751abf0-caf7-441a-8161-1f95587f78fd/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1771750761" data-likes="65" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>do other people cry in the shower or is that just a me thing</p></div>
+                <div class="post-tags"><span class="tag">#Sad</span><span class="tag">#Bittersweet</span><span class="tag">#Reflective</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 22, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>65</span></span>
+                    </div>
+                </div>
+                <a href="/post/d845d6d9-b515-42e9-b751-491330f8bc8d/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="note" data-created="1771664887" data-likes="60" data-comments="0">
+                <span class="post-type-tag">Note</span>
+                
+                <div class="post-content"><p>it&#x27;s okay if today was hard. try again tomorrow.</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Tired</span><span class="tag">#Sad</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 21, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>60</span></span>
+                    </div>
+                </div>
+                <a href="/post/8bfc69c0-7b8a-42a4-ae45-8c2188df9530/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1771664375" data-likes="63" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>I love my friends so much it scares me sometimes
+what if im in love with them</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Confession</span><span class="tag">#Love</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 21, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>63</span></span>
+                    </div>
+                </div>
+                <a href="/post/ea137042-59af-4a02-82b9-7fb5b60ba81b/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1771491729" data-likes="61" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>I still check their profile even though nothing ever changes</p></div>
+                <div class="post-tags"><span class="tag">#Wholesome</span><span class="tag">#Bittersweet</span><span class="tag">#Reflective</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 19, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>61</span></span>
+                    </div>
+                </div>
+                <a href="/post/41a50cbf-bcfd-467f-a458-d53713e2d660/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1771439948" data-likes="61" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>whatsssappppp</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Sad</span><span class="tag">#Broken</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 18, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>61</span></span>
+                    </div>
+                </div>
+                <a href="/post/d39118f4-ba14-4605-bffa-ca09ba4ad5d8/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="confession" data-created="1771405315" data-likes="59" data-comments="0">
+                <span class="post-type-tag">Confession</span>
+                
+                <div class="post-content"><p>I laughed at something he said and I hate that I meant it</p></div>
+                <div class="post-tags"><span class="tag">#Confession</span><span class="tag">#Regret</span><span class="tag">#Bittersweet</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 18, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>59</span></span>
+                    </div>
+                </div>
+                <a href="/post/e5797cd6-c3a3-4a17-848c-2136b1aa598e/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="confession" data-created="1771318709" data-likes="56" data-comments="0">
+                <span class="post-type-tag">Confession</span>
+                
+                <div class="post-content"><p>I genuinely don&#x27;t know how people make friends after 20</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Lonely</span><span class="tag">#Tired</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 17, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>56</span></span>
+                    </div>
+                </div>
+                <a href="/post/5004ab1d-f52a-4a74-884a-9bb07f241728/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1771232233" data-likes="56" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>my love language is sending people videos at 1am btw</p></div>
+                <div class="post-tags"><span class="tag">#Love</span><span class="tag">#Bittersweet</span><span class="tag">#Dreamy</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 16, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>56</span></span>
+                    </div>
+                </div>
+                <a href="/post/a49cd40c-46ae-46a9-b387-f40abcd38b61/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1771145808" data-likes="60" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>im funnier when im tired</p></div>
+                <div class="post-tags"><span class="tag">#Tired</span><span class="tag">#Bittersweet</span><span class="tag">#Confession</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 15, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>60</span></span>
+                    </div>
+                </div>
+                <a href="/post/d2a8e143-b4ff-4c09-afcf-eeda6f692229/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1771145793" data-likes="55" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>I actually had a good day today and I don&#x27;t know what to do with that</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Happy</span><span class="tag">#Peaceful</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 15, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>55</span></span>
+                    </div>
+                </div>
+                <a href="/post/eb1f3d5c-c628-465f-b000-81165069739b/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1771059544" data-likes="56" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>the audacity I have when I&#x27;m well rested is unmatched</p></div>
+                <div class="post-tags"><span class="tag">#Inspired</span><span class="tag">#Healing</span><span class="tag">#Gratitude</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 14, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>56</span></span>
+                    </div>
+                </div>
+                <a href="/post/dbd7e90e-0e9a-4b79-8030-738f21ec3269/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="letter" data-created="1770973524" data-likes="52" data-comments="0">
+                <span class="post-type-tag">Letter</span>
+                
+                <div class="post-content"><p>dear february: you were brutal this year. I made it though.
+- cally</p></div>
+                <div class="post-tags"><span class="tag">#Growing</span><span class="tag">#Tired</span><span class="tag">#Dark</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 13, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>52</span></span>
+                    </div>
+                </div>
+                <a href="/post/09512726-1bdd-40e2-8fdb-de181dc6078d/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="unsent" data-created="1770887000" data-likes="56" data-comments="0">
+                <span class="post-type-tag">Unsent</span>
+                
+                <div class="post-content"><p>I&#x27;m not angry anymore. I just wish things were different.</p></div>
+                <div class="post-tags"><span class="tag">#Regret</span><span class="tag">#Bittersweet</span><span class="tag">#Angry</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 12, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>56</span></span>
+                    </div>
+                </div>
+                <a href="/post/43101573-cb86-455c-a032-16bbec5c2623/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1770799958" data-likes="53" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>brooo what</p></div>
+                <div class="post-tags"><span class="tag">#Sad</span><span class="tag">#Broken</span><span class="tag">#Angry</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 11, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>53</span></span>
+                    </div>
+                </div>
+                <a href="/post/e11e5d04-dca3-4cdd-8dc7-c3b2e74a9f71/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1770353593" data-likes="113" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>16 nigas</p></div>
+                <div class="post-tags"><span class="tag">#Growing</span><span class="tag">#Bittersweet</span><span class="tag">#Found</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 06, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>113</span></span>
+                    </div>
+                </div>
+                <a href="/post/9b657707-93f8-4d30-ab02-74d9dd54a4f6/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1770061010" data-likes="110" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>its freakin february</p></div>
+                <div class="post-tags"><span class="tag">#Growing</span><span class="tag">#Bittersweet</span><span class="tag">#Excited</span></div>
+                <div class="post-footer">
+                    <span class="date">Feb 02, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>110</span></span>
+                    </div>
+                </div>
+                <a href="/post/ce63f306-8bc1-4d56-8b47-1a934450d0a1/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769874704" data-likes="110" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>howoowowow</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Excited</span><span class="tag">#Sad</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 31, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>110</span></span>
+                    </div>
+                </div>
+                <a href="/post/5e2d45bc-cdc6-4bfd-b282-f6a3cff44825/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769831645" data-likes="117" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>spencer is jewish</p></div>
+                <div class="post-tags"><span class="tag">#Found</span><span class="tag">#Bittersweet</span><span class="tag">#Growing</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 31, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>117</span></span>
+                    </div>
+                </div>
+                <a href="/post/3a24d2c8-2ef5-4e80-822b-d640ad528dbb/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="confession" data-created="1769727850" data-likes="119" data-comments="0">
+                <span class="post-type-tag">Confession</span>
+                
+                <div class="post-content"><p>Spencer Jew</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Growing</span><span class="tag">#Found</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 29, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>119</span></span>
+                    </div>
+                </div>
+                <a href="/post/13e12f98-3cfb-405d-87de-ccceecff811d/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="confession" data-created="1769727693" data-likes="116" data-comments="0">
+                <span class="post-type-tag">Confession</span>
+                
+                <div class="post-content"><p>Bro I’m so locked out</p></div>
+                <div class="post-tags"><span class="tag">#Sad</span><span class="tag">#Broken</span><span class="tag">#Lost</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 29, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>116</span></span>
+                    </div>
+                </div>
+                <a href="/post/db23e95b-8e5c-4009-90ae-2369407094e3/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="unsent" data-created="1769659025" data-likes="123" data-comments="0">
+                <span class="post-type-tag">Unsent</span>
+                
+                <div class="post-content"><p>What’s the color pink</p></div>
+                <div class="post-tags"><span class="tag">#Found</span><span class="tag">#Inspired</span><span class="tag">#Bittersweet</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 29, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>123</span></span>
+                    </div>
+                </div>
+                <a href="/post/3ee6efbb-f615-4f6d-af30-3c3b591d4d36/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769654442" data-likes="116" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>you don&#x27;t got to go to work work work work work work work</p></div>
+                <div class="post-tags"><span class="tag">#Wholesome</span><span class="tag">#Tired</span><span class="tag">#Found</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 29, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>116</span></span>
+                    </div>
+                </div>
+                <a href="/post/4e71f7e8-2588-4c7e-8b68-4e5c30cc0c52/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="confession" data-created="1769635682" data-likes="102" data-comments="0">
+                <span class="post-type-tag">Confession</span>
+                
+                <div class="post-content"><p>I hate #### wait no vin…. Vinegar</p></div>
+                <div class="post-tags"><span class="tag">#Sad</span><span class="tag">#Angry</span><span class="tag">#Confession</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 28, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>102</span></span>
+                    </div>
+                </div>
+                <a href="/post/fba2d4d3-dabb-4405-b341-23b5535f46cf/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="letter" data-created="1769635592" data-likes="106" data-comments="0">
+                <span class="post-type-tag">Letter</span>
+                
+                <div class="post-content"><p>I got breakfast on my minddddd</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Wholesome</span><span class="tag">#Reflective</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 28, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>106</span></span>
+                    </div>
+                </div>
+                <a href="/post/bdff00a8-95c3-43f7-b43b-dacbd8c0738a/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769630345" data-likes="98" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>homebody...</p></div>
+                <div class="post-tags"><span class="tag">#Peaceful</span><span class="tag">#Numb</span><span class="tag">#Bittersweet</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 28, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>98</span></span>
+                    </div>
+                </div>
+                <a href="/post/fd571768-55e0-4c6d-9b6e-d3244945fcfd/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769568457" data-likes="102" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>bro what is fent</p></div>
+                <div class="post-tags"><span class="tag">#Broken</span><span class="tag">#Venting</span><span class="tag">#Deep</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 28, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>102</span></span>
+                    </div>
+                </div>
+                <a href="/post/7787e091-428d-4965-a45d-72ff031c32ff/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769533684" data-likes="103" data-comments="1">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>####### supplies homeless dudes with fent</p></div>
+                <div class="post-tags"><span class="tag">#Venting</span><span class="tag">#Deep</span><span class="tag">#Wholesome</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 27, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>1</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>103</span></span>
+                    </div>
+                </div>
+                <a href="/post/370552bf-acd4-4dc0-9ee0-8baf3d694070/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="apology" data-created="1769527204" data-likes="100" data-comments="0">
+                <span class="post-type-tag">Apology</span>
+                
+                <div class="post-content"><p>The songbird never lives</p></div>
+                <div class="post-tags"><span class="tag">#Lost</span><span class="tag">#Sad</span><span class="tag">#Broken</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 27, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>100</span></span>
+                    </div>
+                </div>
+                <a href="/post/20c7be04-aa58-4bd7-ba86-e6f6c25d0a55/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769456793" data-likes="96" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>The phone goes both ways...</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Confession</span><span class="tag">#Wholesome</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>96</span></span>
+                    </div>
+                </div>
+                <a href="/post/229d0a23-99a4-43cf-ba78-73879cee9733/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769451581" data-likes="100" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>To her, 
+
+I never got over you</p></div>
+                <div class="post-tags"><span class="tag">#Angry</span><span class="tag">#Confession</span><span class="tag">#Venting</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>100</span></span>
+                    </div>
+                </div>
+                <a href="/post/7384577e-8f12-4d4d-b414-860cb18c070d/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="unsent" data-created="1769451556" data-likes="91" data-comments="0">
+                <span class="post-type-tag">Unsent</span>
+                
+                <div class="post-content"><p>I’m so tired of cheddar cheese and hotdogs</p></div>
+                <div class="post-tags"><span class="tag">#Tired</span><span class="tag">#Sad</span><span class="tag">#Venting</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>91</span></span>
+                    </div>
+                </div>
+                <a href="/post/ac25dc98-412c-49cf-aa17-28291d7613ad/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769451541" data-likes="88" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>Buddy what’s even the point of life</p></div>
+                <div class="post-tags"><span class="tag">#Sad</span><span class="tag">#Tired</span><span class="tag">#Angry</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>88</span></span>
+                    </div>
+                </div>
+                <a href="/post/850eb939-1372-4f25-8f6c-9e89acdae46c/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="confession" data-created="1769439459" data-likes="97" data-comments="0">
+                <span class="post-type-tag">Confession</span>
+                
+                <div class="post-content"><p>###### is a IDF soldier</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Found</span><span class="tag">#Wholesome</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>97</span></span>
+                    </div>
+                </div>
+                <a href="/post/08c2ff6b-7758-45f4-8a38-565fb218638b/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="confession" data-created="1769403660" data-likes="102" data-comments="0">
+                <span class="post-type-tag">Confession</span>
+                
+                <div class="post-content"><p>i’m gay</p></div>
+                <div class="post-tags"><span class="tag">#Confession</span><span class="tag">#Bittersweet</span><span class="tag">#Growing</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>102</span></span>
+                    </div>
+                </div>
+                <a href="/post/6526686d-8f1f-4dc7-91a9-8a4b445863f9/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="poem" data-created="1769403628" data-likes="92" data-comments="0">
+                <span class="post-type-tag">Poem</span>
+                
+                <div class="post-content"><p>Roses are red, the ocean is blue, srihith is alil fruity, but Im sure you knew.</p></div>
+                <div class="post-tags"><span class="tag">#Found</span><span class="tag">#Inspired</span><span class="tag">#Growing</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>92</span></span>
+                    </div>
+                </div>
+                <a href="/post/3f60cb3a-4928-4a29-9316-9a09a4843174/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769403577" data-likes="103" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>i pooped in my university urinal</p></div>
+                <div class="post-tags"><span class="tag">#Confession</span><span class="tag">#Bittersweet</span><span class="tag">#Found</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>103</span></span>
+                    </div>
+                </div>
+                <a href="/post/eaa4ad9a-dfea-41bc-91de-7dbbebd72a75/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769403367" data-likes="113" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>Yoo acchly</p></div>
+                <div class="post-tags"><span class="tag">#Angry</span><span class="tag">#Wholesome</span><span class="tag">#Dreamy</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>113</span></span>
+                    </div>
+                </div>
+                <a href="/post/0d5cea5a-0fab-44a4-b571-7f966ca075bf/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="confession" data-created="1769403061" data-likes="120" data-comments="0">
+                <span class="post-type-tag">Confession</span>
+                
+                <div class="post-content"><p>Im gay... but no one will ever find out</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Peaceful</span><span class="tag">#Lost</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>120</span></span>
+                    </div>
+                </div>
+                <a href="/post/3bdfb047-743c-4642-8864-0f9d790d772f/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769402882" data-likes="120" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>Srit u could lwk take a calm 8 inches btw</p></div>
+                <div class="post-tags"><span class="tag">#Peaceful</span><span class="tag">#Wholesome</span><span class="tag">#Growing</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>120</span></span>
+                    </div>
+                </div>
+                <a href="/post/34f8a673-97c7-4569-8597-96b426b9d97e/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="confession" data-created="1769402632" data-likes="137" data-comments="0">
+                <span class="post-type-tag">Confession</span>
+                
+                <div class="post-content"><p>####### gave me straight teeth on January 21st in the Roberts Research Library in the disabled bathroom.</p></div>
+                <div class="post-tags"><span class="tag">#Found</span><span class="tag">#Bittersweet</span><span class="tag">#Wholesome</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>137</span></span>
+                    </div>
+                </div>
+                <a href="/post/d87f9621-99e1-4c9c-9970-af73f2750ebc/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="note" data-created="1769398968" data-likes="138" data-comments="0">
+                <span class="post-type-tag">Note</span>
+                
+                <div class="post-content"><p>John Deere &gt; Srit &gt;= Ninjabana</p></div>
+                <div class="post-tags"><span class="tag">#Found</span><span class="tag">#Reflective</span><span class="tag">#Broken</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>138</span></span>
+                    </div>
+                </div>
+                <a href="/post/1eb7ec15-f0e7-4d76-99c3-b4ddd8f24922/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="poem" data-created="1769398817" data-likes="152" data-comments="0">
+                <span class="post-type-tag">Poem</span>
+                
+                <div class="post-content"><p>Goon goon goon it’s day and night js like da sun and the moon</p></div>
+                <div class="post-tags"><span class="tag">#Dreamy</span><span class="tag">#Found</span><span class="tag">#Inspired</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>152</span></span>
+                    </div>
+                </div>
+                <a href="/post/9977209a-8084-4ae6-837b-8d4462af7320/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="poem" data-created="1769398667" data-likes="156" data-comments="8">
+                <span class="post-type-tag">Poem</span>
+                
+                <div class="post-content"><p>#### is a ####### who loves getting straight teeth all braces no cap</p></div>
+                <div class="post-tags"><span class="tag">#Happy</span><span class="tag">#Dreamy</span><span class="tag">#Growing</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>8</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>156</span></span>
+                    </div>
+                </div>
+                <a href="/post/90cd4325-e521-49ec-a1f3-8adf11fd4060/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769398599" data-likes="151" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>Heuy</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Growing</span><span class="tag">#Found</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>151</span></span>
+                    </div>
+                </div>
+                <a href="/post/1e0072e0-9bb4-4fe7-abdc-7a357a881bd9/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769397518" data-likes="167" data-comments="2">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>Of course i self love, i #########</p></div>
+                <div class="post-tags"><span class="tag">#Confession</span><span class="tag">#Love</span><span class="tag">#Happy</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>2</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>167</span></span>
+                    </div>
+                </div>
+                <a href="/post/d6225d97-e328-45b2-87c4-b2836fd64fca/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769397445" data-likes="174" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>Of course i talk to myself sometimes i need an experts advice 
+
+-Sj</p></div>
+                <div class="post-tags"><span class="tag">#Venting</span><span class="tag">#Confession</span><span class="tag">#Reflective</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>174</span></span>
+                    </div>
+                </div>
+                <a href="/post/a3a89c88-6753-444a-a186-8174cc32840c/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769397296" data-likes="176" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>Im not lazy, I&#x27;m on energy saving mode
+
+-LFM</p></div>
+                <div class="post-tags"><span class="tag">#Wholesome</span><span class="tag">#Confession</span><span class="tag">#Bittersweet</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>176</span></span>
+                    </div>
+                </div>
+                <a href="/post/b3a5d27e-6c29-4665-9a82-eabde724451b/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769396952" data-likes="197" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>why’s srit lowkey a pawn</p></div>
+                <div class="post-tags"><span class="tag">#Sad</span><span class="tag">#Bittersweet</span><span class="tag">#Tired</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>197</span></span>
+                    </div>
+                </div>
+                <a href="/post/613c34b8-cede-41d4-ab58-e3f5cb17476d/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769395998" data-likes="198" data-comments="1">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>srit is so look</p></div>
+                <div class="post-tags"><span class="tag">#Inspired</span><span class="tag">#Dreamy</span><span class="tag">#Wholesome</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>1</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>198</span></span>
+                    </div>
+                </div>
+                <a href="/post/2b4b63d0-0378-4937-91e1-b593fda7ea5d/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769395504" data-likes="196" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>Every day is a new opportunity to learn and grow</p></div>
+                <div class="post-tags"><span class="tag">#Growing</span><span class="tag">#Wholesome</span><span class="tag">#Inspired</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>196</span></span>
+                    </div>
+                </div>
+                <a href="/post/132762c5-0a4c-46a9-bb57-24136d3771ed/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769395422" data-likes="196" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>I love sreet and miss uim</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Peaceful</span><span class="tag">#Love</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>196</span></span>
+                    </div>
+                </div>
+                <a href="/post/47bf1e38-bd08-49c7-8323-711472766cdd/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769394514" data-likes="201" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>Omar aka “Giveaway Goblin” Badawy</p></div>
+                <div class="post-tags"><span class="tag">#Growing</span><span class="tag">#Found</span><span class="tag">#Bittersweet</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>201</span></span>
+                    </div>
+                </div>
+                <a href="/post/bb08e6ff-ea72-4c4a-85e0-1aed716af824/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="poem" data-created="1769393431" data-likes="211" data-comments="0">
+                <span class="post-type-tag">Poem</span>
+                
+                <div class="post-content"><p>SJwalkemup2heaven more like SJwalkemup2sixseven</p></div>
+                <div class="post-tags"><span class="tag">#Growing</span><span class="tag">#Dreamy</span><span class="tag">#Bittersweet</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>211</span></span>
+                    </div>
+                </div>
+                <a href="/post/45df21d1-b8b2-4cfc-af3b-d381d6cca5bb/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="confession" data-created="1769392319" data-likes="205" data-comments="0">
+                <span class="post-type-tag">Confession</span>
+                
+                <div class="post-content"><p>I love 2K</p></div>
+                <div class="post-tags"><span class="tag">#Peaceful</span><span class="tag">#Bittersweet</span><span class="tag">#Dreamy</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>205</span></span>
+                    </div>
+                </div>
+                <a href="/post/236a82a7-de94-4847-b786-f7c20e1f3060/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="poem" data-created="1769391544" data-likes="204" data-comments="0">
+                <span class="post-type-tag">Poem</span>
+                
+                <div class="post-content"><p>What does a bird see when it is blind? 
+
+perhaps nothing and everything at all
+
+Does it even matter though?</p></div>
+                <div class="post-tags"><span class="tag">#Broken</span><span class="tag">#Sad</span><span class="tag">#Bittersweet</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>204</span></span>
+                    </div>
+                </div>
+                <a href="/post/6d83a8e4-5f05-485a-98f8-ad9ec4245e61/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="note" data-created="1769390950" data-likes="212" data-comments="0">
+                <span class="post-type-tag">Note</span>
+                
+                <div class="post-content"><p>I’m krine son 😭</p></div>
+                <div class="post-tags"><span class="tag">#Sad</span><span class="tag">#Confession</span><span class="tag">#Angry</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>212</span></span>
+                    </div>
+                </div>
+                <a href="/post/1ce2846c-9612-4648-88d0-7cf820c0fa58/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769390766" data-likes="213" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>The lesbian haircut is the style for 2026</p></div>
+                <div class="post-tags"><span class="tag">#Found</span><span class="tag">#Inspired</span><span class="tag">#Bittersweet</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>213</span></span>
+                    </div>
+                </div>
+                <a href="/post/a34d1ee9-bdbd-4941-9295-c0ffdd88649b/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769390037" data-likes="221" data-comments="1">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>I like Mochi</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Peaceful</span><span class="tag">#Dreamy</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>1</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>221</span></span>
+                    </div>
+                </div>
+                <a href="/post/0a607a2e-596b-49f6-9f8b-e5d6758a4dec/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+            <article class="post-card archive-post-card" data-type="thought" data-created="1769389956" data-likes="215" data-comments="0">
+                <span class="post-type-tag">Thought</span>
+                
+                <div class="post-content"><p>I love purple cats and pink dogs.</p></div>
+                <div class="post-tags"><span class="tag">#Bittersweet</span><span class="tag">#Growing</span><span class="tag">#Dreamy</span></div>
+                <div class="post-footer">
+                    <span class="date">Jan 26, 2026</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="/static/core/images/comment.png" alt="" class="action-icon"><span>0</span></span>
+                        <span class="archive-action"><img src="/static/core/images/fullheart.png" alt="" class="action-icon"><span>215</span></span>
+                    </div>
+                </div>
+                <a href="/post/16ded0af-fbce-48b2-a481-b74a9093e300/" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            
+        </div>
+        <div class="empty-state archive-no-results" id="archiveNoResults" hidden><p>No preserved entries match that search.</p></div>
+    </div>
+</div>
+
+<noscript><div class="archive-noscript">Search, filtering, and sorting need JavaScript. Every preserved entry is still listed above without it.</div></noscript>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const grid = document.getElementById('archivePostGrid');
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll('.archive-post-card'));
+    const search = document.getElementById('archiveSearch');
+    const searchForm = document.getElementById('archiveSearchForm');
+    const typeFilters = Array.from(document.querySelectorAll('#archiveTypeFilters input[type="checkbox"]'));
+    const sortButtons = Array.from(document.querySelectorAll('[data-archive-sort]'));
+    const resultCount = document.getElementById('archiveResultCount');
+    const noResults = document.getElementById('archiveNoResults');
+    let currentSort = 'newest';
+
+    function selectedTypes() { return typeFilters.filter(input => input.checked).map(input => input.value); }
+    function cardMatches(card, query, types) {
+        const typeMatch = types.length === 0 || types.includes(card.dataset.type);
+        return typeMatch && (!query || card.textContent.toLowerCase().includes(query));
+    }
+    function sortCards(list) {
+        return list.sort((a, b) => {
+            if (currentSort === 'popular') return Number(b.dataset.likes) - Number(a.dataset.likes) || Number(b.dataset.created) - Number(a.dataset.created);
+            if (currentSort === 'most_commented') return Number(b.dataset.comments) - Number(a.dataset.comments) || Number(b.dataset.created) - Number(a.dataset.created);
+            return Number(b.dataset.created) - Number(a.dataset.created);
+        });
+    }
+    function applyArchiveView() {
+        const query = (search.value || '').trim().toLowerCase();
+        const types = selectedTypes();
+        const visible = [], hidden = [];
+        cards.forEach(card => { const match = cardMatches(card, query, types); card.hidden = !match; (match ? visible : hidden).push(card); });
+        sortCards(visible).forEach(card => grid.appendChild(card));
+        hidden.forEach(card => grid.appendChild(card));
+        const count = visible.length;
+        resultCount.textContent = `${count} of ${cards.length} preserved entr${count === 1 ? 'y' : 'ies'}`;
+        noResults.hidden = count !== 0;
+    }
+    searchForm.addEventListener('submit', event => event.preventDefault());
+    search.addEventListener('input', applyArchiveView);
+    typeFilters.forEach(input => input.addEventListener('change', applyArchiveView));
+    sortButtons.forEach(button => button.addEventListener('click', function (event) {
+        event.preventDefault(); currentSort = this.dataset.archiveSort;
+        sortButtons.forEach(item => item.classList.toggle('active', item === this)); applyArchiveView();
+    }));
+    applyArchiveView();
+});
+</script>
+
+    </main>
+
+    <footer>
+        <h2 class="footer-logo">KRINE</h2>
+        
+        <p class="archive-footer-line">Closed network · 83 public entries preserved · KRN-20260126-20260905-0083</p>
+        <p>Read-only archive of an anonymous experiment.</p>
+        
+    </footer>
+</body>
+
+</html>

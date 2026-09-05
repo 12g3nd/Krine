@@ -1,30 +1,61 @@
-from django.shortcuts import render, redirect, get_object_or_404
-import threading
-from django.db.models import Count, Q, Exists, OuterRef
-from .models import Post, Comment, Reaction, Report
-from .forms import PostForm, CommentForm
-from .ai_service import ai_analyzer
-
-from django.utils import timezone
 from datetime import timedelta
-from django_ratelimit.decorators import ratelimit
+import threading
+
+from django.conf import settings
 from django.core.exceptions import PermissionDenied
+from django.db.models import Count, Q, Exists, OuterRef
+from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import timezone
+from django_ratelimit.decorators import ratelimit
+
+from .ai_service import ai_analyzer
+from .forms import PostForm, CommentForm
+from .models import Post, Comment, Reaction, Report
+
+
+def _archive_enabled():
+    return getattr(settings, 'ARCHIVE_MODE', False)
+
+
+def _public_posts():
+    return Post.objects.filter(is_flagged=False, is_analyzed=True)
+
 
 def post_list(request):
+    if _archive_enabled():
+        posts = (
+            _public_posts()
+            .annotate(
+                archive_likes=Count(
+                    'reactions',
+                    filter=Q(reactions__reaction_type=Reaction.LIKE),
+                    distinct=True,
+                ),
+                archive_comments=Count('comments', distinct=True),
+            )
+            .prefetch_related('tags')
+            .order_by('-created_at')
+        )
+        return render(request, 'core/archive_post_list.html', {
+            'posts': posts,
+            'current_sort': 'newest',
+            'current_time': 'all',
+            'selected_types': [],
+        })
+
     # Sorting and Filtering
     sort_by = request.GET.get('sort', 'newest')
     time_filter = request.GET.get('time', 'all')
-    
+
     my_posts = request.session.get('my_posts', [])
-    
+
     # Show:
     # 1. Flagged=False AND Analyzed=True (Public safe posts)
     # 2. OR: ID in my_posts (My posts, even if unanalyzed or flagged - though maybe hide flagged?)
     # Let's show my posts if they are NOT flagged yet. If flagged, they disappear.
     # But if unanalyzed, they show up.
-    
     posts = Post.objects.filter(
-        (Q(is_flagged=False) & Q(is_analyzed=True)) | 
+        (Q(is_flagged=False) & Q(is_analyzed=True)) |
         (Q(id__in=my_posts) & Q(is_flagged=False))
     ).distinct()
 
@@ -32,7 +63,7 @@ def post_list(request):
     post_types = request.GET.getlist('type')
     if post_types:
         posts = posts.filter(post_type__in=post_types)
-    
+
     # Time Filter
     if time_filter != 'all':
         now = timezone.now()
@@ -46,19 +77,25 @@ def post_list(request):
             start_date = now - timedelta(days=365)
         else:
             start_date = None
-            
+
         if start_date:
             posts = posts.filter(created_at__gte=start_date)
 
     # Sorting
     if sort_by == 'popular':
-        # Annotate with like count for sorting
-        posts = posts.annotate(total_likes=Count('reactions', filter=Q(reactions__reaction_type=Reaction.LIKE))).order_by('-total_likes', '-created_at')
+        posts = posts.annotate(
+            total_likes=Count(
+                'reactions',
+                filter=Q(reactions__reaction_type=Reaction.LIKE),
+            )
+        ).order_by('-total_likes', '-created_at')
     elif sort_by == 'most_commented':
-        posts = posts.annotate(total_comments=Count('comments')).order_by('-total_comments', '-created_at')
-    else: # newest
+        posts = posts.annotate(
+            total_comments=Count('comments')
+        ).order_by('-total_comments', '-created_at')
+    else:  # newest
         posts = posts.order_by('-created_at')
-    
+
     # Optional: Basic search
     query = request.GET.get('q')
     if query:
@@ -77,7 +114,7 @@ def post_list(request):
         reaction_type=Reaction.LIKE
     )
     posts = posts.annotate(is_liked=Exists(is_liked_subquery))
-    
+
     return render(request, 'core/post_list.html', {
         'posts': posts,
         'current_sort': sort_by,
@@ -85,18 +122,22 @@ def post_list(request):
         'selected_types': post_types
     })
 
+
 def static_page(request, page_name):
-    # Generic view for static pages to avoid creating many separate views
-    # Ensure page_name is safe or whitelist it
-    valid_pages = ['about', 'mission', 'faq', 'legal', 'security', 'safety']
+    valid_pages = ['about', 'mission', 'faq', 'legal', 'security', 'safety', 'archive']
     if page_name not in valid_pages:
         return redirect('post_list')
-        
+
     context = {'page_name': page_name}
-    return render(request, 'core/static_page.html', context)
+    template = 'core/archive_static_page.html' if _archive_enabled() else 'core/static_page.html'
+    return render(request, template, context)
+
 
 @ratelimit(key='ip', rate='5/m', block=False)
 def create_post(request):
+    if _archive_enabled():
+        return redirect('archive')
+
     # Check if rate limited
     if getattr(request, 'limited', False):
         return render(request, 'core/create_post.html', {
@@ -109,10 +150,13 @@ def create_post(request):
         if form.is_valid():
             # Save immediately (is_analyzed=False by default)
             post = form.save()
-            
+
             # Start AI Analysis in Background Thread
-            thread = threading.Thread(target=ai_analyzer.analyze_and_tag_post_background, args=(post.id,))
-            thread.daemon = True 
+            thread = threading.Thread(
+                target=ai_analyzer.analyze_and_tag_post_background,
+                args=(post.id,),
+            )
+            thread.daemon = True
             thread.start()
 
             # Track for notifications
@@ -120,17 +164,36 @@ def create_post(request):
             my_posts.append(str(post.id))
             request.session['my_posts'] = my_posts
             request.session.modified = True
-                
+
             return redirect('post_list')
     else:
         form = PostForm()
-    
+
     return render(request, 'core/create_post.html', {'form': form})
 
+
 def post_detail(request, pk):
+    if _archive_enabled():
+        post = get_object_or_404(
+            Post.objects.prefetch_related('tags', 'comments', 'reactions'),
+            pk=pk,
+            is_flagged=False,
+            is_analyzed=True,
+        )
+        comments = post.comments.order_by('created_at')
+        return render(request, 'core/archive_post_detail.html', {
+            'post': post,
+            'comments': comments,
+            'comment_form': None,
+            'is_liked': False,
+            'archive_like_count': post.reactions.filter(
+                reaction_type=Reaction.LIKE
+            ).count(),
+        })
+
     post = get_object_or_404(Post, pk=pk)
     comments = post.comments.order_by('created_at')
-    
+
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
@@ -145,7 +208,7 @@ def post_detail(request, pk):
     if not request.session.session_key:
         request.session.create()
     session_id = request.session.session_key
-    
+
     is_liked = Reaction.objects.filter(
         post=post,
         session_id=session_id,
@@ -159,24 +222,27 @@ def post_detail(request, pk):
         'is_liked': is_liked
     })
 
+
 @ratelimit(key='ip', rate='20/m', block=True)
 def like_post(request, pk):
+    if _archive_enabled():
+        return redirect('post_detail', pk=pk)
+
     post = get_object_or_404(Post, pk=pk)
-    
+
     # Basic Anon Session Tracking
     if not request.session.session_key:
         request.session.create()
     session_id = request.session.session_key
-    
+
     # Toggle like
     reaction, created = Reaction.objects.get_or_create(
         post=post,
         session_id=session_id,
         reaction_type=Reaction.LIKE
     )
-    
+
     if not created:
-        # If already liked, unlike (delete)
         reaction.delete()
         is_liked = False
     else:
@@ -187,27 +253,36 @@ def like_post(request, pk):
         from django.http import JsonResponse
         return JsonResponse({
             'liked': is_liked,
-            'count': post.reactions.filter(reaction_type=Reaction.LIKE).count()
+            'count': post.reactions.filter(
+                reaction_type=Reaction.LIKE
+            ).count()
         })
-        
-    # Return to previous page
+
     return redirect(request.META.get('HTTP_REFERER', 'post_list'))
+
 
 @ratelimit(key='ip', rate='5/m', block=True)
 def add_comment(request, pk):
+    if _archive_enabled():
+        return redirect('post_detail', pk=pk)
+
     # Handled in post_detail usually, but if called directly:
     return redirect('post_detail', pk=pk)
 
+
 @ratelimit(key='ip', rate='5/m', block=True)
 def report_post(request, pk):
+    if _archive_enabled():
+        return redirect('post_detail', pk=pk)
+
     post = get_object_or_404(Post, pk=pk)
-    
+
     if request.method == 'POST':
         reason = request.POST.get('reason', 'other')
         if not request.session.session_key:
             request.session.create()
         session_id = request.session.session_key
-        
+
         # Prevent duplicate reports from same session
         if not Report.objects.filter(post=post, session_id=session_id).exists():
             Report.objects.create(
@@ -215,26 +290,30 @@ def report_post(request, pk):
                 reason=reason,
                 session_id=session_id
             )
-        
-        # Determine redirect (AJAX vs Standard)
+
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             from django.http import JsonResponse
             return JsonResponse({'status': 'reported'})
-            
+
     return redirect(request.META.get('HTTP_REFERER', 'post_list'))
+
 
 # Helper for context processor
 def get_notification_count(request):
-    if not request.session.get('my_posts'):
+    if _archive_enabled() or not request.session.get('my_posts'):
         return 0
-    
+
     my_post_ids = request.session.get('my_posts', [])
     total_comments = Comment.objects.filter(post__id__in=my_post_ids).count()
     last_seen = request.session.get('last_seen_comments_count', 0)
-    
+
     return max(0, total_comments - last_seen)
 
+
 def clear_notifications(request):
+    if _archive_enabled():
+        return redirect('archive')
+
     if request.method == 'POST':
         my_post_ids = request.session.get('my_posts', [])
         total_comments = Comment.objects.filter(post__id__in=my_post_ids).count()

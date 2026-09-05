@@ -1,5 +1,7 @@
 from django.urls import path
+
 from . import views
+
 
 urlpatterns = [
     path('', views.post_list, name='post_list'),
@@ -17,4 +19,5 @@ urlpatterns = [
     path('legal/', views.static_page, {'page_name': 'legal'}, name='legal'),
     path('security/', views.static_page, {'page_name': 'security'}, name='security'),
     path('safety/', views.static_page, {'page_name': 'safety'}, name='safety'),
+    path('archive/', views.static_page, {'page_name': 'archive'}, name='archive'),
 ]

@@ -1,0 +1,73 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="post-detail-container archive-detail-container">
+    <div class="archive-entry-header">
+        <a href="{% url 'post_list' %}" class="archive-back-link">&larr; Back to Archive</a>
+        <div class="archive-entry-id">ENTRY / {{ post.id }}</div>
+    </div>
+
+    <div class="archive-entry-meta">
+        <span class="post-type-tag archive-detail-type">{{ post.get_post_type_display }}</span>
+        <span>Published <time datetime="{{ post.created_at|date:'c' }}">{{ post.created_at|date:"F d, Y · H:i" }} UTC</time></span>
+        <span class="archive-immutable-mark">IMMUTABLE COPY</span>
+    </div>
+
+    {% if post.image %}
+    <figure class="archive-detail-image-wrap">
+        <img src="/media/{{ post.image.name|urlencode:"/" }}" alt="" class="archive-detail-image">
+    </figure>
+    {% endif %}
+
+    <div class="full-post-content archive-full-post-content">
+        {{ post.content|linebreaks }}
+    </div>
+
+    <div class="post-tags">
+        {% for tag in post.tags.all %}
+        <span class="tag">#{{ tag.name }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="post-footer archive-detail-footer">
+        <span>Recorded interaction</span>
+        <div class="archive-static-actions">
+            <span class="archive-action">
+                <img src="{% static 'core/images/fullheart.png' %}" alt="" class="action-icon">
+                <span>{{ archive_like_count }} Like{{ archive_like_count|pluralize }}</span>
+            </span>
+            <span class="archive-action">
+                <img src="{% static 'core/images/comment.png' %}" alt="" class="action-icon">
+                <span>{{ comments|length }} Comment{{ comments|length|pluralize }}</span>
+            </span>
+        </div>
+    </div>
+
+    <div class="archive-seal-note">
+        <div class="archive-seal-symbol" aria-hidden="true">×</div>
+        <div>
+            <strong>This entry can no longer change.</strong>
+            <p>Posting, liking, commenting, reporting, and moderation are offline. Counts and text reflect the state captured when Krine was sealed.</p>
+        </div>
+    </div>
+
+    <section class="comments-section archive-comments-section">
+        <div class="archive-section-heading">
+            <h3>Comments ({{ comments|length }})</h3>
+            <span>preserved chronologically</span>
+        </div>
+
+        {% for comment in comments %}
+        <article class="comment archive-comment">
+            <p>{{ comment.content }}</p>
+            <div class="comment-date">
+                <time datetime="{{ comment.created_at|date:'c' }}">{{ comment.created_at|date:"F d, Y · H:i" }} UTC</time>
+            </div>
+        </article>
+        {% empty %}
+        <p class="archive-muted-copy">No comments were recorded on this entry.</p>
+        {% endfor %}
+    </section>
+</div>
+{% endblock %}

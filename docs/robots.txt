@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://krine.ca/sitemap.xml
