@@ -1,0 +1,126 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="archive-hero">
+    <div class="archive-kicker">PRESERVED PUBLIC RECORD / {{ ARCHIVE.record_id }}</div>
+    <h1>Honest thoughts, <span class="highlight"><em>after the room went quiet.</em></span></h1>
+    <p>Krine is closed. What remains here is the final public record of the network, preserved without accounts, posting, likes, reports, or new comments.</p>
+
+    <div class="archive-ledger" aria-label="Krine archive summary">
+        <div class="archive-ledger-item"><span class="archive-ledger-label">STATUS</span><strong>CLOSED / READ ONLY</strong></div>
+        <div class="archive-ledger-item"><span class="archive-ledger-label">PUBLIC ENTRIES</span><strong>{{ ARCHIVE.post_count }}</strong></div>
+        <div class="archive-ledger-item"><span class="archive-ledger-label">COMMENTS</span><strong>{{ ARCHIVE.comment_count }}</strong></div>
+        <div class="archive-ledger-item"><span class="archive-ledger-label">LIKES RECORDED</span><strong>{{ ARCHIVE.like_count }}</strong></div>
+        <div class="archive-ledger-item"><span class="archive-ledger-label">RECORDED ACTIVITY</span><strong>{{ ARCHIVE.opened_date|date:"M d, Y" }} → {{ ARCHIVE.closed_date|date:"M d, Y" }}</strong></div>
+    </div>
+
+    <form class="search-form archive-search-form" id="archiveSearchForm" role="search">
+        <input id="archiveSearch" type="search" placeholder="Search the preserved network..." autocomplete="off">
+    </form>
+</section>
+
+<div class="archive-controls">
+    <div class="sort-options" aria-label="Sort archive">
+        <span class="archive-control-label">Sort by:</span>
+        <a href="?sort=newest" class="sort-btn active" data-archive-sort="newest">Newest</a>
+        <a href="?sort=popular" class="sort-btn" data-archive-sort="popular">Popular</a>
+        <a href="?sort=most_commented" class="sort-btn" data-archive-sort="most_commented">Most Commented</a>
+    </div>
+    <div class="archive-result-count" id="archiveResultCount">{{ ARCHIVE.post_count }} preserved entries</div>
+</div>
+
+<div class="content-wrapper">
+    <aside class="filter-section archive-filter-section">
+        <div class="filter-header">
+            <div class="filter-title">Filter by Type</div>
+            <button type="button" class="filter-toggle-btn" onclick="document.querySelector('.filter-chips-container').classList.toggle('active')"><span>Filter</span> ▾</button>
+        </div>
+        <div class="filter-chips-container" id="archiveTypeFilters">
+            <label class="filter-chip"><input type="checkbox" value="letter"><span>Letter</span></label>
+            <label class="filter-chip"><input type="checkbox" value="poem"><span>Poem</span></label>
+            <label class="filter-chip"><input type="checkbox" value="thought"><span>Thought</span></label>
+            <label class="filter-chip"><input type="checkbox" value="confession"><span>Confession</span></label>
+            <label class="filter-chip"><input type="checkbox" value="apology"><span>Apology</span></label>
+            <label class="filter-chip"><input type="checkbox" value="unsent"><span>Unsent</span></label>
+            <label class="filter-chip"><input type="checkbox" value="note"><span>Note</span></label>
+        </div>
+        <div class="archive-filter-note">These controls run entirely in your browser. The archive has no application server behind it.</div>
+    </aside>
+
+    <div class="archive-feed-column">
+        <div class="post-grid" id="archivePostGrid">
+            {% for post in posts %}
+            <article class="post-card archive-post-card" data-type="{{ post.post_type }}" data-created="{{ post.created_at|date:'U' }}" data-likes="{{ post.archive_likes }}" data-comments="{{ post.archive_comments }}">
+                <span class="post-type-tag">{{ post.get_post_type_display }}</span>
+                {% if post.image %}
+                <div class="archive-post-image-wrap"><img src="/media/{{ post.image.name|urlencode:"/" }}" alt="" class="archive-post-image" loading="lazy"></div>
+                {% endif %}
+                <div class="post-content"><p>{{ post.content|truncatechars:240 }}</p></div>
+                <div class="post-tags">{% for tag in post.tags.all %}<span class="tag">#{{ tag.name }}</span>{% endfor %}</div>
+                <div class="post-footer">
+                    <span class="date">{{ post.created_at|date:"M d, Y" }}</span>
+                    <div class="actions archive-static-actions" aria-label="Recorded interaction counts">
+                        <span class="archive-action"><img src="{% static 'core/images/comment.png' %}" alt="" class="action-icon"><span>{{ post.archive_comments }}</span></span>
+                        <span class="archive-action"><img src="{% static 'core/images/fullheart.png' %}" alt="" class="action-icon"><span>{{ post.archive_likes }}</span></span>
+                    </div>
+                </div>
+                <a href="{% url 'post_detail' pk=post.pk %}" class="card-link" aria-label="Open preserved entry"></a>
+            </article>
+            {% empty %}
+            <div class="empty-state"><p>No public entries survived into the archive.</p></div>
+            {% endfor %}
+        </div>
+        <div class="empty-state archive-no-results" id="archiveNoResults" hidden><p>No preserved entries match that search.</p></div>
+    </div>
+</div>
+
+<noscript><div class="archive-noscript">Search, filtering, and sorting need JavaScript. Every preserved entry is still listed above without it.</div></noscript>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const grid = document.getElementById('archivePostGrid');
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll('.archive-post-card'));
+    const search = document.getElementById('archiveSearch');
+    const searchForm = document.getElementById('archiveSearchForm');
+    const typeFilters = Array.from(document.querySelectorAll('#archiveTypeFilters input[type="checkbox"]'));
+    const sortButtons = Array.from(document.querySelectorAll('[data-archive-sort]'));
+    const resultCount = document.getElementById('archiveResultCount');
+    const noResults = document.getElementById('archiveNoResults');
+    let currentSort = 'newest';
+
+    function selectedTypes() { return typeFilters.filter(input => input.checked).map(input => input.value); }
+    function cardMatches(card, query, types) {
+        const typeMatch = types.length === 0 || types.includes(card.dataset.type);
+        return typeMatch && (!query || card.textContent.toLowerCase().includes(query));
+    }
+    function sortCards(list) {
+        return list.sort((a, b) => {
+            if (currentSort === 'popular') return Number(b.dataset.likes) - Number(a.dataset.likes) || Number(b.dataset.created) - Number(a.dataset.created);
+            if (currentSort === 'most_commented') return Number(b.dataset.comments) - Number(a.dataset.comments) || Number(b.dataset.created) - Number(a.dataset.created);
+            return Number(b.dataset.created) - Number(a.dataset.created);
+        });
+    }
+    function applyArchiveView() {
+        const query = (search.value || '').trim().toLowerCase();
+        const types = selectedTypes();
+        const visible = [], hidden = [];
+        cards.forEach(card => { const match = cardMatches(card, query, types); card.hidden = !match; (match ? visible : hidden).push(card); });
+        sortCards(visible).forEach(card => grid.appendChild(card));
+        hidden.forEach(card => grid.appendChild(card));
+        const count = visible.length;
+        resultCount.textContent = `${count} of ${cards.length} preserved entr${count === 1 ? 'y' : 'ies'}`;
+        noResults.hidden = count !== 0;
+    }
+    searchForm.addEventListener('submit', event => event.preventDefault());
+    search.addEventListener('input', applyArchiveView);
+    typeFilters.forEach(input => input.addEventListener('change', applyArchiveView));
+    sortButtons.forEach(button => button.addEventListener('click', function (event) {
+        event.preventDefault(); currentSort = this.dataset.archiveSort;
+        sortButtons.forEach(item => item.classList.toggle('active', item === this)); applyArchiveView();
+    }));
+    applyArchiveView();
+});
+</script>
+{% endblock %}
