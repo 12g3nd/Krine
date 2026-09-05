@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Krine, a closed read-only archive of an anonymous social experiment.">
+    <title>Krine · Closed Network</title>
+    <link rel="icon" type="image/png" href="/static/core/images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/core/main.css?v=14">
+    
+    <link rel="stylesheet" href="/static/core/archive.css?v=1">
+    
+</head>
+
+<body class="archive-mode">
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">
+                <img src="/static/core/images/logo.png" alt="Krine Logo">
+            </a>
+
+            <div class="mobile-actions">
+                
+                <a href="/archive/" class="archive-mobile-mark">SEALED</a>
+                
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <div class="nav-links">
+                <a href="/about/" class="nav-item">About</a>
+                <a href="/mission/" class="nav-item">Mission</a>
+                <a href="/faq/" class="nav-item">FAQ</a>
+
+                <div class="dropdown">
+                    <span class="nav-item">Legal & Compliance ▾</span>
+                    <div class="dropdown-content">
+                        <a href="/legal/">Terms & Privacy</a>
+                        <a href="/security/">Security</a>
+                        <a href="/safety/">Safety</a>
+                    </div>
+                </div>
+
+                
+                <a href="/archive/" class="archive-nav-link">
+                    <span class="archive-dot"></span>
+                    Closed Archive
+                </a>
+                
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="archive-strip" role="status">
+        <div class="container archive-strip-inner">
+            <span>KRINE / CLOSED NETWORK</span>
+            <span class="archive-strip-divider">·</span>
+            <span>83 PUBLIC ENTRIES</span>
+            <span class="archive-strip-divider">·</span>
+            <span>2026.01.26 → 2026.09.05</span>
+            <span class="archive-strip-divider archive-strip-wide">·</span>
+            <span class="archive-strip-wide">KRN-20260126-20260905-0083</span>
+        </div>
+    </div>
+    
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+    </script>
+
+    <main class="container main-content">
+        
+<div class="post-detail-container archive-detail-container">
+    <div class="archive-entry-header">
+        <a href="/" class="archive-back-link">&larr; Back to Archive</a>
+        <div class="archive-entry-id">ENTRY / ce63f306-8bc1-4d56-8b47-1a934450d0a1</div>
+    </div>
+
+    <div class="archive-entry-meta">
+        <span class="post-type-tag archive-detail-type">Thought</span>
+        <span>Published <time datetime="2026-02-02T19:36:50.044557+00:00">February 02, 2026 · 19:36 UTC</time></span>
+        <span class="archive-immutable-mark">IMMUTABLE COPY</span>
+    </div>
+
+    
+
+    <div class="full-post-content archive-full-post-content">
+        <p>its freakin february</p>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="tag">#Bittersweet</span>
+        
+        <span class="tag">#Growing</span>
+        
+        <span class="tag">#Excited</span>
+        
+    </div>
+
+    <div class="post-footer archive-detail-footer">
+        <span>Recorded interaction</span>
+        <div class="archive-static-actions">
+            <span class="archive-action">
+                <img src="/static/core/images/fullheart.png" alt="" class="action-icon">
+                <span>110 Likes</span>
+            </span>
+            <span class="archive-action">
+                <img src="/static/core/images/comment.png" alt="" class="action-icon">
+                <span>0 Comments</span>
+            </span>
+        </div>
+    </div>
+
+    <div class="archive-seal-note">
+        <div class="archive-seal-symbol" aria-hidden="true">×</div>
+        <div>
+            <strong>This entry can no longer change.</strong>
+            <p>Posting, liking, commenting, reporting, and moderation are offline. Counts and text reflect the state captured when Krine was sealed.</p>
+        </div>
+    </div>
+
+    <section class="comments-section archive-comments-section">
+        <div class="archive-section-heading">
+            <h3>Comments (0)</h3>
+            <span>preserved chronologically</span>
+        </div>
+
+        
+        <p class="archive-muted-copy">No comments were recorded on this entry.</p>
+        
+    </section>
+</div>
+
+    </main>
+
+    <footer>
+        <h2 class="footer-logo">KRINE</h2>
+        
+        <p class="archive-footer-line">Closed network · 83 public entries preserved · KRN-20260126-20260905-0083</p>
+        <p>Read-only archive of an anonymous experiment.</p>
+        
+    </footer>
+</body>
+
+</html>

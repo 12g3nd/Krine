@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Krine, a closed read-only archive of an anonymous social experiment.">
+    <title>Krine · Closed Network</title>
+    <link rel="icon" type="image/png" href="/static/core/images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/core/main.css?v=14">
+    
+    <link rel="stylesheet" href="/static/core/archive.css?v=1">
+    
+</head>
+
+<body class="archive-mode">
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">
+                <img src="/static/core/images/logo.png" alt="Krine Logo">
+            </a>
+
+            <div class="mobile-actions">
+                
+                <a href="/archive/" class="archive-mobile-mark">SEALED</a>
+                
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <div class="nav-links">
+                <a href="/about/" class="nav-item">About</a>
+                <a href="/mission/" class="nav-item">Mission</a>
+                <a href="/faq/" class="nav-item">FAQ</a>
+
+                <div class="dropdown">
+                    <span class="nav-item">Legal & Compliance ▾</span>
+                    <div class="dropdown-content">
+                        <a href="/legal/">Terms & Privacy</a>
+                        <a href="/security/">Security</a>
+                        <a href="/safety/">Safety</a>
+                    </div>
+                </div>
+
+                
+                <a href="/archive/" class="archive-nav-link">
+                    <span class="archive-dot"></span>
+                    Closed Archive
+                </a>
+                
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="archive-strip" role="status">
+        <div class="container archive-strip-inner">
+            <span>KRINE / CLOSED NETWORK</span>
+            <span class="archive-strip-divider">·</span>
+            <span>83 PUBLIC ENTRIES</span>
+            <span class="archive-strip-divider">·</span>
+            <span>2026.01.26 → 2026.09.05</span>
+            <span class="archive-strip-divider archive-strip-wide">·</span>
+            <span class="archive-strip-wide">KRN-20260126-20260905-0083</span>
+        </div>
+    </div>
+    
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+    </script>
+
+    <main class="container main-content">
+        
+<div class="post-detail-container archive-static-container">
+    <div class="static-content">
+        
+        <div class="archive-kicker">ARCHIVE RECORD / KRN-20260126-20260905-0083</div>
+        <h2 class="archive-page-title">The network is closed.</h2>
+        <p class="archive-page-lede">Krine was an experiment in anonymous expression. The live application has been retired; this copy preserves the public-facing record without keeping a server, database, moderation worker, or writable community online.</p>
+
+        <div class="archive-record-grid">
+            <div class="archive-record-cell"><span>Status</span><strong>CLOSED / READ ONLY</strong></div>
+            <div class="archive-record-cell"><span>Public entries</span><strong>83</strong></div>
+            <div class="archive-record-cell"><span>Comments</span><strong>14</strong></div>
+            <div class="archive-record-cell"><span>Likes recorded</span><strong>10683</strong></div>
+            <div class="archive-record-cell"><span>First public entry</span><strong>Jan 26, 2026 · 01:12 UTC</strong></div>
+            <div class="archive-record-cell"><span>Last public entry</span><strong>Jun 03, 2026 · 08:59 UTC</strong></div>
+            <div class="archive-record-cell"><span>Archive sealed</span><strong>Sep 05, 2026</strong></div>
+            <div class="archive-record-cell"><span>Record ID</span><strong>KRN-20260126-20260905-0083</strong></div>
+        </div>
+
+        <div class="archive-provenance">
+            <h3>What this archive keeps</h3>
+            <p>Public posts that had completed moderation and were not flagged, their public tags, public comments, recorded like totals, timestamps, and media attached to those surviving posts.</p>
+            <h3>What it deliberately leaves behind</h3>
+            <p>Browser sessions, write endpoints, AI model files, moderation workers, server logs, private environment variables, database credentials, and moderation-only records are not part of the public artifact.</p>
+            <h3>How it behaves now</h3>
+            <p>Search, sorting, and type filters run locally in your browser. Entry pages are ordinary static files. There is no application server listening behind the interface and nothing you do here is written back anywhere.</p>
+            <h3>Source</h3>
+            <p>The original application and the archive tooling remain visible in the <a href="https://github.com/12g3nd/Krine" rel="noopener noreferrer">Krine source repository</a>.</p>
+        </div>
+
+        <div class="archive-terminal"><span>network_status</span><strong>closed</strong><span>write_access</span><strong>none</strong><span>record</span><strong>KRN-20260126-20260905-0083</strong></div>
+
+        
+    </div>
+</div>
+
+    </main>
+
+    <footer>
+        <h2 class="footer-logo">KRINE</h2>
+        
+        <p class="archive-footer-line">Closed network · 83 public entries preserved · KRN-20260126-20260905-0083</p>
+        <p>Read-only archive of an anonymous experiment.</p>
+        
+    </footer>
+</body>
+
+</html>
