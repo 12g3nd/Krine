@@ -1,58 +1,76 @@
 # Krine
 
-Krine is a thought experiment about what an anonymous social platform could look like. It aims to empower users to share thoughts freely while leveraging local AI for content safety and organization.
+Krine is a thought experiment about what an anonymous social platform could look like. The live application is being retired into **Krine / Closed Network**, a read-only static archive at `krine.ca`.
 
-## AI Note
+## Archive state
 
-The project was created using a lot of help from Google's Antigravity and Claude Code.
+Krine now supports a sealed archive mode. With `ARCHIVE_MODE=True`, write methods fail closed, the Django admin is not mounted, analytics are disabled, and the interface becomes a read-only record. Only posts matching `is_analyzed=True AND is_flagged=False` appear in the public archive.
 
-## Features
+The archive keeps the original visual language, but treats the site as a closed network rather than a broken app: final public-entry counts, recorded activity dates, immutable entry pages, comments, like totals, timestamps, tags, and surviving media are preserved.
 
-- **Anonymous Posting** — no account registration, ever.
-- **AI Moderation** — every post is analyzed for safety (filtering harmful content) and tagged with emotional/topical labels.
+## Static export
+
+Generate the GitHub Pages version from the production database with:
+
+```bash
+python manage.py export_archive \
+  --domain krine.ca \
+  --closed-date YYYY-MM-DD
+```
+
+The exporter writes to `docs/` by default and creates:
+
+- the final public feed
+- one static page per surviving public post
+- preserved public comments, tags, like totals, timestamps, and referenced media
+- the About / Mission / FAQ / Legal / Security / Safety pages
+- an Archive Record page
+- `CNAME`, `.nojekyll`, `robots.txt`, and `sitemap.xml`
+- `archive-manifest.json` with SHA-256 hashes and an archive fingerprint
+
+If a public post references media that cannot be copied, export stops rather than silently producing an incomplete archive. `--allow-missing-media` exists only for intentional loss.
+
+## Before retiring the server
+
+Do **not** destroy the DigitalOcean Droplet just because the static export succeeds. First preserve private backups of the production PostgreSQL database and production media.
+
+Recommended retirement sequence:
+
+1. back up production PostgreSQL
+2. back up the production media directory
+3. run the static export
+4. inspect `docs/` and `archive-manifest.json`
+5. publish `docs/` with GitHub Pages at `krine.ca`
+6. verify DNS, HTTPS, posts, comments, images, search/filter/sort, and the Archive Record page
+7. only then destroy the old server
+
+## Original features
+
+- **Anonymous Posting** — no account registration.
+- **AI Moderation** — posts were analyzed for safety and tagged with emotional/topical labels.
 - **Community Interaction** — session-based likes and anonymous comments.
-- **Smart Discovery** — sort by Newest, Popular, or Most Commented; filter by post type or time window.
+- **Smart Discovery** — sort by Newest, Popular, or Most Commented; filter by post type.
 
-## Tech Stack
+## Tech stack
 
-- **Backend**: Django 5+
-- **Frontend**: HTML, vanilla CSS, vanilla JavaScript
-- **AI/ML**: PyTorch + HuggingFace Transformers (zero-shot classification)
-- **Database**: SQLite by default; PostgreSQL supported via `DATABASE_URL`
-- **Cache (optional)**: Redis
-- **Object storage (optional)**: any S3-compatible service
+- **Backend:** Django 5+
+- **Frontend:** HTML, vanilla CSS, vanilla JavaScript
+- **AI/ML:** PyTorch + Hugging Face Transformers
+- **Database:** SQLite by default; PostgreSQL supported via `DATABASE_URL`
+- **Cache:** optional Redis
+- **Object storage:** optional S3-compatible storage
+- **Archive target:** static HTML/CSS/JS on GitHub Pages
 
+## Development
 
-## AI moderation
+Run tests before merging archive changes:
 
-Every new post is analyzed in a background thread before it becomes visible
-in the public feed. The pipeline is two stages:
-
-1. **Regex pre-check** — emails and phone numbers are flagged immediately.
-2. **Zero-shot classification** against two label sets:
-   - **Safety**: Safe, Hate Speech, Violence, Harassment, Personal Information
-   - **Vibes** (top 3 are stored as tags): Nostalgic, Hopeful, Melancholy,
-     Venting, Confession, Lonely, Healing, etc.
-
-Posts trip the safety filter when:
-
-- the `Safe` score collapses below 3%, or
-- `Harassment` exceeds `Safe` by 3× and is itself above 0.10 (catches
-  targeted attacks while letting general venting through), or
-- `Violence`, `Hate Speech`, or `Personal Information` cross fixed
-  thresholds.
-
-## Contributing
-
-Pull requests are welcome. To keep things sane:
-
-- Run `python manage.py test core` before opening a PR.
-- For UI changes, please test the create/list/detail flows in a browser.
-- Don't commit `.env`, the SQLite database, or the HuggingFace model cache.
-- Keep new dependencies minimal and justify them in the PR description.
+```bash
+python manage.py test core
+```
 
 ## License
 
 Krine is released under the [MIT License](LICENSE).
 
-Made with love by sj
+Made with love by sj.
