@@ -19,12 +19,10 @@
     <meta name="description" content="{% if ARCHIVE_MODE %}Krine, a closed read-only archive of an anonymous social experiment.{% else %}Krine, anonymous thoughts and connection.{% endif %}">
     <title>{% if ARCHIVE_MODE %}Krine · Closed Network{% else %}Krine{% endif %}</title>
     <link rel="icon" type="image/png" href="{% static 'core/images/favicon.png' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'core/main.css' %}?v=14">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'core/main.css' %}?v=15">
     {% if ARCHIVE_MODE %}
-    <link rel="stylesheet" href="{% static 'core/archive.css' %}?v=1">
+    <link rel="stylesheet" href="{% static 'core/archive.css' %}?v=2">
     {% endif %}
 </head>
 

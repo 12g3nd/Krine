@@ -1,73 +1,64 @@
 # Krine
 
-Krine is a thought experiment about what an anonymous social platform could look like. The live application is being retired into **Krine / Closed Network**, a read-only static archive at `krine.ca`.
+Krine was a small anonymous social experiment. It is now permanently retired as **Krine / Closed Network**, a read-only static archive at `https://krine.ca`.
 
-## Archive state
+No application server, database, moderation worker, account system, or writable endpoint remains online. The public site is served entirely from `main:/docs` with GitHub Pages.
 
-Krine now supports a sealed archive mode. With `ARCHIVE_MODE=True`, write methods fail closed, the Django admin is not mounted, analytics are disabled, and the interface becomes a read-only record. Only posts matching `is_analyzed=True AND is_flagged=False` appear in the public archive.
+## Final public record
 
-The archive keeps the original visual language, but treats the site as a closed network rather than a broken app: final public-entry counts, recorded activity dates, immutable entry pages, comments, like totals, timestamps, tags, and surviving media are preserved.
+- **Opened:** 2026-01-26
+- **Last public entry:** 2026-06-03
+- **Sealed:** 2026-09-05
+- **Public entries:** 83
+- **Comments:** 14
+- **Recorded likes:** 10,683
+- **Public media files:** 0
+- **Record ID:** `KRN-20260126-20260905-0083`
+- **Sealed capture fingerprint:** `f6b70f0b9548cbcf3941dfa2222c2ded7f92141f88552a96f4b6268fbc9d2d6f`
 
-## Static export
+The static artifact includes a machine-readable `docs/archive-manifest.json` with per-file SHA-256 hashes and the current artifact fingerprint. The original seal fingerprint is retained separately so the first production-derived capture remains identifiable even after small archival epilogue improvements.
 
-Generate the GitHub Pages version from the production database with:
+## Closed Network
 
-```bash
-python manage.py export_archive \
-  --domain krine.ca \
-  --closed-date YYYY-MM-DD
+The archive preserves only public posts that had completed moderation and were not flagged:
+
+```text
+is_analyzed=True AND is_flagged=False
 ```
 
-The exporter writes to `docs/` by default and creates:
+It preserves public post text, tags, comments, like totals, timestamps, and any media referenced by surviving public posts. Browser sessions, reports, moderation-only records, server logs, environment variables, credentials, model files, and the production database are deliberately absent from the public artifact.
 
-- the final public feed
-- one static page per surviving public post
-- preserved public comments, tags, like totals, timestamps, and referenced media
-- the About / Mission / FAQ / Legal / Security / Safety pages
-- an Archive Record page
-- `CNAME`, `.nojekyll`, `robots.txt`, and `sitemap.xml`
-- `archive-manifest.json` with SHA-256 hashes and an archive fingerprint
+Search, sorting, and type filtering now run entirely in the browser. Nothing on `krine.ca` writes anywhere.
 
-If a public post references media that cannot be copied, export stops rather than silently producing an incomplete archive. `--allow-missing-media` exists only for intentional loss.
+## Preservation
 
-## Before retiring the server
+Before the live DigitalOcean deployment was destroyed, the production PostgreSQL dump, media directory, deployment configuration, and live git commit were preserved privately and hash-verified off-server. Those private materials are intentionally not committed here.
 
-Do **not** destroy the DigitalOcean Droplet just because the static export succeeds. First preserve private backups of the production PostgreSQL database and production media.
+The public archive was validated before retirement:
 
-Recommended retirement sequence:
+- Django system check passed
+- archive tests: 5/5 passed
+- full core tests: 16/16 passed
+- 83/83 public entry pages present
+- secret/private-data scan clean
+- unrendered-template/error scan clean
+- live write-control scan clean
+- internal-link scan clean
+- no missing public media
 
-1. back up production PostgreSQL
-2. back up the production media directory
-3. run the static export
-4. inspect `docs/` and `archive-manifest.json`
-5. publish `docs/` with GitHub Pages at `krine.ca`
-6. verify DNS, HTTPS, posts, comments, images, search/filter/sort, and the Archive Record page
-7. only then destroy the old server
+## Epilogue
 
-## Original features
+The final archive received three deliberately small post-retirement changes:
 
-- **Anonymous Posting** — no account registration.
-- **AI Moderation** — posts were analyzed for safety and tagged with emotional/topical labels.
-- **Community Interaction** — session-based likes and anonymous comments.
-- **Smart Discovery** — sort by Newest, Popular, or Most Commented; filter by post type.
+1. Google Fonts was removed so the archive no longer depends on an external font service.
+2. The Archive Record page exposes a shortened form of the original sealed capture fingerprint.
+3. A static network-telemetry relic visualizes the preserved monthly entry trace and final silence using only archived data.
 
-## Tech stack
+These changes do not alter the preserved posts, comments, tags, timestamps, or interaction counts.
 
-- **Backend:** Django 5+
-- **Frontend:** HTML, vanilla CSS, vanilla JavaScript
-- **AI/ML:** PyTorch + Hugging Face Transformers
-- **Database:** SQLite by default; PostgreSQL supported via `DATABASE_URL`
-- **Cache:** optional Redis
-- **Object storage:** optional S3-compatible storage
-- **Archive target:** static HTML/CSS/JS on GitHub Pages
+## Original application
 
-## Development
-
-Run tests before merging archive changes:
-
-```bash
-python manage.py test core
-```
+Krine was built with Django, vanilla HTML/CSS/JavaScript, PostgreSQL, optional Redis, and a Hugging Face zero-shot moderation pipeline. The repository retains the original application and archive-export tooling for historical context.
 
 ## License
 

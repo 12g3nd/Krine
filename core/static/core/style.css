@@ -9,7 +9,7 @@
     /* Cyan */
     --glass-bg: rgba(22, 27, 34, 0.6);
     --glass-border: rgba(240, 246, 252, 0.1);
-    --font-main: 'Outfit', sans-serif;
+    --font-main: "Avenir Next", "Segoe UI Variable", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
 * {

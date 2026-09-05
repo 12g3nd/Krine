@@ -17,7 +17,7 @@
     /* More visible contrast */
     --shadow-color: #010409;
 
-    --font-main: 'Outfit', sans-serif;
+    --font-main: "Avenir Next", "Segoe UI Variable", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     --pink-color: #ec4899;
 }
 
